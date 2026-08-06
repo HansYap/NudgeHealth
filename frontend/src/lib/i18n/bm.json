@@ -1,0 +1,22 @@
+{
+  "brand": {
+    "name": "NudgeHealth",
+    "headline": "Mengubah data kematian Malaysia menjadi langkah seterusnya anda."
+  },
+  "trustBadges": [
+    "Mematuhi Akta Perlindungan Data Peribadi (PDPA) 2010 Malaysia",
+    "Dibina atas data DOSM & data kesihatan negara",
+    "Bukan alat diagnosis perubatan"
+  ],
+  "login": {
+    "title": "Log masuk",
+    "subtitle": "Selamat kembali, teruskan dari tempat anda tinggalkan.",
+    "identifierLabel": "E-mel atau nombor telefon",
+    "passwordLabel": "Kata laluan",
+    "forgotPassword": "Lupa kata laluan?",
+    "submit": "Log masuk",
+    "signupPrompt": "Baru di sini?",
+    "signupCta": "Cipta akaun",
+    "securityNote": "Data kesihatan anda disulitkan dan kekal peribadi"
+  }
+}
