@@ -12,7 +12,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)  # this hashes the password, never stores it plain
+        user.set_password(password)  # hashes the password
         user.save()
         return user
 
@@ -23,18 +23,13 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    """AbstractUser gives us all of Django's built-in user stuff (password
-    hashing, permissions, is_active, etc.) for free — we're just swapping
-    out username for email as the login field."""
-
-    username = None  # we don't want this field at all
+    username = None  # Disabled default username
     email = models.EmailField(unique=True)
-    state = models.CharField(max_length=40, blank=True)  # which Malaysian state, used later for clinics
 
-    USERNAME_FIELD = "email"   # this is what Django uses to log in
-    REQUIRED_FIELDS = []       # extra fields asked for by createsuperuser — none needed
+    USERNAME_FIELD = "email"   # Uses email to log in
+    REQUIRED_FIELDS = []
 
-    objects = UserManager()    # tell Django to use our custom manager above
+    objects = UserManager()
 
     def __str__(self):
         return self.email
