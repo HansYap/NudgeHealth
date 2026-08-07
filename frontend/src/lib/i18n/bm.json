@@ -4,7 +4,6 @@
     "headline": "Mengubah data kematian Malaysia menjadi langkah seterusnya anda."
   },
   "trustBadges": [
-    "Mematuhi Akta Perlindungan Data Peribadi (PDPA) 2010 Malaysia",
     "Dibina atas data DOSM & data kesihatan negara",
     "Bukan alat diagnosis perubatan"
   ],
@@ -18,5 +17,86 @@
     "signupPrompt": "Baru di sini?",
     "signupCta": "Cipta akaun",
     "securityNote": "Data kesihatan anda disulitkan dan kekal peribadi"
+  },
+  "signup": {
+    "title": "Daftar",
+    "subtitle": "Mari kita mulakan!",
+    "emailLabel": "E-mel",
+    "passwordLabel": "Kata laluan",
+    "confirmPasswordLabel": "Sahkan kata laluan",
+    "submit": "Daftar",
+    "loginPrompt": "Sudah mempunyai akaun?",
+    "loginCta": "Log masuk",
+    "securityNote": "Data kesihatan anda disulitkan dan kekal peribadi"
+  },
+  "nav": {
+    "home": "Utama",
+    "plan": "Pelan",
+    "diary": "Diari",
+    "profile": "Profil"
+  },
+  "home": {
+    "title": "Selamat kembali",
+    "subtitle": "Ini keadaan anda hari ini.",
+    "riskEyebrow": "Risiko anda bulan ini",
+    "viewDetails": "Lihat butiran",
+    "disclaimerTitle": "Penafian",
+    "disclaimerBody": "Skor ini menunjukkan bagaimana tabiat harian anda seperti senaman, berat badan dan merokok mempengaruhi kesihatan jangka panjang anda. Sebarang keadaan kesihatan sedia ada atau pemeriksaan digunakan untuk membina pelan tindakan bulanan anda, bukan untuk menurunkan skor ini.",
+    "focusTitle": "Fokus bulan ini",
+    "viewFullPlan": "Lihat pelan penuh",
+    "errorTitle": "Skor anda tidak dapat dikira",
+    "errorBody": "Berlaku masalah di pihak kami, jawapan anda telah disimpan.",
+    "retry": "Cuba lagi"
+  },
+  "risk": {
+    "back": "Kembali ke Utama",
+    "calcTitle": "Bagaimana ini dikira",
+    "calcBody": "Kami bermula dengan data kesihatan standard untuk umur dan lokasi anda di Malaysia, kemudian melaraskannya berdasarkan tabiat harian anda. Enjin ini menggunakan penyelidikan perubatan yang terbukti untuk menukar tabiat tersebut kepada skor mudah antara 10 dan 100.",
+    "contributingTitle": "Apa yang menyumbang",
+    "seePlan": "Lihat pelan peribadi anda",
+    "bands": {
+      "low": "Rendah",
+      "moderate": "Sederhana",
+      "high": "Tinggi"
+    }
+  },
+  "plan": {
+    "title": "Pelan bulanan anda",
+    "subtitle": "Disusun mengikut apa yang paling penting untuk profil risiko anda.",
+    "priority": "Keutamaan",
+    "findClinic": "Cari klinik berdekatan"
+  },
+  "clinic": {
+    "back": "Kembali ke Pelan",
+    "title": "Cari klinik berdekatan",
+    "subtitle": "Membuka Google Maps berpusat pada lokasi peranti anda, tiada apa-apa dicari di pihak kami.",
+    "openInMaps": "Buka dalam Maps",
+    "privacyNote": "Dibuka dalam tab baharu, lokasi anda kekal dengan Google Maps, bukan dengan kami"
+  },
+  "diary": {
+    "title": "Diari kesihatan",
+    "subtitle": "Hari yang baik dan hari yang sukar kedua-duanya penting di sini.",
+    "moodLegend": "Bagaimana perasaan anda hari ini?",
+    "moods": {
+      "bad": "Kurang baik",
+      "okay": "Sederhana",
+      "good": "Baik"
+    },
+    "noteLabel": "Ada apa-apa untuk dicatat? (pilihan)",
+    "notePlaceholder": "cth. tidur lena, terlepas makan tengah hari…",
+    "autoLogged": "Direkodkan secara automatik dengan tarikh & masa hari ini",
+    "save": "Simpan catatan",
+    "historyTitle": "Sejarah anda",
+    "emptyTitle": "Tiada catatan diari lagi",
+    "emptyMessage": "Catat perasaan anda hari ini, ia mengambil masa kurang 30 saat.",
+    "emptyCta": "Tambah catatan pertama"
+  },
+  "profile": {
+    "title": "Profil",
+    "baselineTitle": "Asas kesihatan anda",
+    "retake": "Ambil semula penilaian",
+    "settingsTitle": "Tetapan",
+    "language": "Bahasa",
+    "logout": "Log keluar"
   }
 }

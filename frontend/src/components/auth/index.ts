@@ -16,6 +16,9 @@ export type { FormHeaderProps } from "./FormHeader";
 export { LoginForm } from "./LoginForm";
 export type { LoginFormProps, LoginFormCopy } from "./LoginForm";
 
+export { SignupForm } from "./SignupForm";
+export type { SignupFormProps, SignupFormCopy } from "./SignupForm";
+
 export { ForgotPasswordLink } from "./ForgotPasswordLink";
 export type { ForgotPasswordLinkProps } from "./ForgotPasswordLink";
 

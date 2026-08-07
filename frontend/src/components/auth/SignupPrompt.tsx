@@ -15,7 +15,7 @@ export function SignupPrompt({
   href,
 }: SignupPromptProps) {
   return (
-    <p className="text-center text-[15px] text-slate-500">
+    <p className="text-center text-sm text-slate-500">
       {promptText}{" "}
       <a
         href={href}

@@ -23,12 +23,12 @@ export function AuthLayout({
   children,
 }: AuthLayoutProps) {
   return (
-    <div className="flex min-h-screen w-full flex-col bg-white md:flex-row">
-      <div className="hidden shrink-0 bg-brand-900 md:flex md:w-[42%] lg:w-[40%] xl:w-[38%]">
+    <div className="flex min-h-screen w-full flex-col bg-alabaster md:flex-row">
+      <div className="hidden shrink-0 bg-gradient-to-br from-brand-700 to-brand-800 md:flex md:w-[42%] lg:w-[40%] xl:w-[38%]">
         {panel}
       </div>
 
-      <div className="relative flex flex-1 flex-col bg-slate-50">
+      <div className="relative flex flex-1 flex-col bg-alabaster">
         <div className="flex items-center justify-between px-6 py-6 sm:px-10 sm:py-8">
           <div className="md:hidden">{mobileBrand}</div>
           <div className="ml-auto">{topRight}</div>

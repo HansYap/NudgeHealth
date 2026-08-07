@@ -4,7 +4,6 @@
     "headline": "Turning Malaysia's mortality data into your next step."
   },
   "trustBadges": [
-    "Complies with Malaysia's Personal Data Protection Act (PDPA) 2010",
     "Built on DOSM & national health data",
     "Not a medical diagnosis tool"
   ],
@@ -18,5 +17,86 @@
     "signupPrompt": "New here?",
     "signupCta": "Create an account",
     "securityNote": "Your health data is encrypted and stays private"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "subtitle": "Let's get you started!",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "submit": "Sign Up",
+    "loginPrompt": "Already have an account?",
+    "loginCta": "Login",
+    "securityNote": "Your health data is encrypted and stays private"
+  },
+  "nav": {
+    "home": "Home",
+    "plan": "Plan",
+    "diary": "Diary",
+    "profile": "Profile"
+  },
+  "home": {
+    "title": "Welcome back",
+    "subtitle": "Here's where things stand today.",
+    "riskEyebrow": "Your risk this month",
+    "viewDetails": "View details",
+    "disclaimerTitle": "Disclaimer",
+    "disclaimerBody": "This score shows how your daily habits like exercise, weight, and smoking affect your long-term health. Any existing health conditions or checkups are used to build your monthly action plan instead of lowering this score.",
+    "focusTitle": "This month's focus",
+    "viewFullPlan": "View full plan",
+    "errorTitle": "Couldn't calculate your score",
+    "errorBody": "Something went wrong on our end, your answers are saved.",
+    "retry": "Try again"
+  },
+  "risk": {
+    "back": "Back to Home",
+    "calcTitle": "How this is calculated",
+    "calcBody": "We start with standard health data for your age and location in Malaysia and adjust it based on your daily habits. The engine uses proven medical research to convert those habits into a simple score between 10 and 100.",
+    "contributingTitle": "What's contributing",
+    "seePlan": "See your personalised plan",
+    "bands": {
+      "low": "Low",
+      "moderate": "Moderate",
+      "high": "Elevated"
+    }
+  },
+  "plan": {
+    "title": "Your monthly plan",
+    "subtitle": "Ranked by what matters most for your risk profile.",
+    "priority": "Priority",
+    "findClinic": "Find a nearby clinic"
+  },
+  "clinic": {
+    "back": "Back to Plan",
+    "title": "Find a nearby clinic",
+    "subtitle": "Opens Google Maps centred on your device's location, nothing is looked up on our end.",
+    "openInMaps": "Open in Maps",
+    "privacyNote": "Opens in a new tab, your location stays with Google Maps, not with us"
+  },
+  "diary": {
+    "title": "Health diary",
+    "subtitle": "Good days and hard days both matter here.",
+    "moodLegend": "How are you feeling today?",
+    "moods": {
+      "bad": "Not great",
+      "okay": "Okay",
+      "good": "Good"
+    },
+    "noteLabel": "Anything to note? (optional)",
+    "notePlaceholder": "e.g. slept well, skipped lunch…",
+    "autoLogged": "Logged automatically with today's date & time",
+    "save": "Save entry",
+    "historyTitle": "Your history",
+    "emptyTitle": "No diary entries yet",
+    "emptyMessage": "Log how you're feeling today, it takes under 30 seconds.",
+    "emptyCta": "Add first entry"
+  },
+  "profile": {
+    "title": "Profile",
+    "baselineTitle": "Your health baseline",
+    "retake": "Retake assessment",
+    "settingsTitle": "Settings",
+    "language": "Language",
+    "logout": "Log out"
   }
 }

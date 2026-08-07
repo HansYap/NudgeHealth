@@ -105,7 +105,7 @@ export function LoginForm({
       {(errors.form || submitError) && (
         <p
           role="alert"
-          className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600"
+          className="rounded-lg bg-rust-light px-4 py-3 text-body-sm text-rust"
         >
           {errors.form ?? submitError}
         </p>

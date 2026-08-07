@@ -9,7 +9,8 @@
   }
 
   body {
-    @apply bg-white text-ink-900 antialiased;
+    /* App background per Design System 01: Alabaster instead of plain white. */
+    @apply bg-alabaster text-ink-900 antialiased;
     font-family:
       "Inter",
       ui-sans-serif,

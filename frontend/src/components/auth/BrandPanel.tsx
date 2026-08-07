@@ -23,7 +23,7 @@ export function BrandPanel({
     >
       <Logo name={brandName} variant="dark" />
 
-      <h1 className="max-w-sm text-[32px] font-bold leading-[1.2] tracking-tight text-white lg:text-4xl">
+      <h1 className="max-w-sm font-sora text-h2 text-white">
         {headline}
       </h1>
 

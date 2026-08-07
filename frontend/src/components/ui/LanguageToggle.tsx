@@ -23,7 +23,7 @@ export function LanguageToggle({
     <div
       role="radiogroup"
       aria-label="Language"
-      className="inline-flex items-center gap-0.5 rounded-full bg-slate-100 p-1"
+      className="inline-flex items-center gap-0.5 rounded-full bg-brand-50 p-1"
     >
       {options.map((option) => {
         const active = value === option.value;
@@ -34,13 +34,13 @@ export function LanguageToggle({
             role="radio"
             aria-checked={active}
             onClick={() => onChange(option.value)}
-            className={`rounded-full px-4 py-1.5 text-sm font-bold outline-none
+            className={`flex min-h-tap items-center rounded-full px-5 text-body-sm font-bold outline-none
               transition-colors duration-150 ease-out
               focus-visible:ring-2 focus-visible:ring-brand-700 focus-visible:ring-offset-1
               ${
                 active
-                  ? "bg-brand-900 text-white shadow-panel"
-                  : "text-slate-500 hover:text-ink-900"
+                  ? "bg-brand-700 text-white shadow-panel"
+                  : "text-brand-700 hover:text-brand-900"
               }`}
           >
             {option.label}

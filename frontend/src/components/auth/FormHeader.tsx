@@ -9,12 +9,8 @@ export interface FormHeaderProps {
 export function FormHeader({ title, subtitle }: FormHeaderProps) {
   return (
     <header>
-      <h2 className="text-[28px] font-bold leading-tight text-ink-900 sm:text-3xl">
-        {title}
-      </h2>
-      <p className="mt-2 text-base leading-relaxed text-slate-500">
-        {subtitle}
-      </p>
+      <h2 className="font-sora text-h2 text-brand-800">{title}</h2>
+      <p className="mt-2 text-body text-slate-500">{subtitle}</p>
     </header>
   );
 }
