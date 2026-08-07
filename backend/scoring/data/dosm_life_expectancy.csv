@@ -1,0 +1,577 @@
+Age,ex,Sex,State
+0,71.6,Male,Johor
+1,71.1,Male,Johor
+5,67.2,Male,Johor
+10,62.2,Male,Johor
+15,57.3,Male,Johor
+20,52.5,Male,Johor
+25,47.8,Male,Johor
+30,43.0,Male,Johor
+35,38.3,Male,Johor
+40,33.7,Male,Johor
+45,29.3,Male,Johor
+50,25.1,Male,Johor
+55,21.1,Male,Johor
+60,17.4,Male,Johor
+65,13.9,Male,Johor
+70,10.8,Male,Johor
+75,8.3,Male,Johor
+80,5.8,Male,Johor
+0,76.2,Female,Johor
+1,75.7,Female,Johor
+5,71.7,Female,Johor
+10,66.8,Female,Johor
+15,61.8,Female,Johor
+20,56.9,Female,Johor
+25,52.0,Female,Johor
+30,47.2,Female,Johor
+35,42.4,Female,Johor
+40,37.7,Female,Johor
+45,33.1,Female,Johor
+50,28.7,Female,Johor
+55,24.4,Female,Johor
+60,20.3,Female,Johor
+65,16.4,Female,Johor
+70,12.7,Female,Johor
+75,9.6,Female,Johor
+80,6.8,Female,Johor
+0,69.1,Male,Kedah
+1,68.5,Male,Kedah
+5,64.6,Male,Kedah
+10,59.6,Male,Kedah
+15,54.7,Male,Kedah
+20,50.0,Male,Kedah
+25,45.3,Male,Kedah
+30,40.6,Male,Kedah
+35,36.0,Male,Kedah
+40,31.7,Male,Kedah
+45,27.7,Male,Kedah
+50,23.9,Male,Kedah
+55,20.2,Male,Kedah
+60,16.8,Male,Kedah
+65,13.8,Male,Kedah
+70,10.9,Male,Kedah
+75,8.2,Male,Kedah
+80,5.6,Male,Kedah
+0,74.6,Female,Kedah
+1,74.1,Female,Kedah
+5,70.2,Female,Kedah
+10,65.2,Female,Kedah
+15,60.3,Female,Kedah
+20,55.4,Female,Kedah
+25,50.5,Female,Kedah
+30,45.7,Female,Kedah
+35,41.0,Female,Kedah
+40,36.3,Female,Kedah
+45,31.9,Female,Kedah
+50,27.6,Female,Kedah
+55,23.5,Female,Kedah
+60,19.6,Female,Kedah
+65,16.0,Female,Kedah
+70,12.5,Female,Kedah
+75,9.4,Female,Kedah
+80,6.6,Female,Kedah
+0,69.3,Male,Kelantan
+1,68.8,Male,Kelantan
+5,64.9,Male,Kelantan
+10,60.0,Male,Kelantan
+15,55.1,Male,Kelantan
+20,50.4,Male,Kelantan
+25,45.7,Male,Kelantan
+30,41.0,Male,Kelantan
+35,36.4,Male,Kelantan
+40,31.9,Male,Kelantan
+45,27.7,Male,Kelantan
+50,23.7,Male,Kelantan
+55,20.0,Male,Kelantan
+60,16.4,Male,Kelantan
+65,13.1,Male,Kelantan
+70,10.0,Male,Kelantan
+75,7.4,Male,Kelantan
+80,5.4,Male,Kelantan
+0,74.6,Female,Kelantan
+1,74.0,Female,Kelantan
+5,70.1,Female,Kelantan
+10,65.1,Female,Kelantan
+15,60.2,Female,Kelantan
+20,55.3,Female,Kelantan
+25,50.4,Female,Kelantan
+30,45.6,Female,Kelantan
+35,40.9,Female,Kelantan
+40,36.3,Female,Kelantan
+45,31.8,Female,Kelantan
+50,27.5,Female,Kelantan
+55,23.3,Female,Kelantan
+60,19.3,Female,Kelantan
+65,15.5,Female,Kelantan
+70,12.0,Female,Kelantan
+75,8.9,Female,Kelantan
+80,6.4,Female,Kelantan
+0,70.6,Male,Melaka
+1,70.2,Male,Melaka
+5,66.3,Male,Melaka
+10,61.3,Male,Melaka
+15,56.4,Male,Melaka
+20,51.6,Male,Melaka
+25,46.8,Male,Melaka
+30,42.1,Male,Melaka
+35,37.3,Male,Melaka
+40,32.7,Male,Melaka
+45,28.0,Male,Melaka
+50,24.0,Male,Melaka
+55,20.2,Male,Melaka
+60,16.8,Male,Melaka
+65,13.6,Male,Melaka
+70,10.5,Male,Melaka
+75,7.6,Male,Melaka
+80,5.6,Male,Melaka
+0,75.9,Female,Melaka
+1,75.4,Female,Melaka
+5,71.5,Female,Melaka
+10,66.5,Female,Melaka
+15,61.6,Female,Melaka
+20,56.7,Female,Melaka
+25,51.7,Female,Melaka
+30,46.9,Female,Melaka
+35,42.0,Female,Melaka
+40,37.3,Female,Melaka
+45,32.6,Female,Melaka
+50,28.0,Female,Melaka
+55,23.9,Female,Melaka
+60,19.8,Female,Melaka
+65,16.0,Female,Melaka
+70,12.5,Female,Melaka
+75,9.2,Female,Melaka
+80,6.6,Female,Melaka
+0,70.3,Male,Negeri Sembilan
+1,69.8,Male,Negeri Sembilan
+5,66.0,Male,Negeri Sembilan
+10,61.0,Male,Negeri Sembilan
+15,56.1,Male,Negeri Sembilan
+20,51.4,Male,Negeri Sembilan
+25,46.6,Male,Negeri Sembilan
+30,41.9,Male,Negeri Sembilan
+35,37.3,Male,Negeri Sembilan
+40,32.6,Male,Negeri Sembilan
+45,28.3,Male,Negeri Sembilan
+50,24.3,Male,Negeri Sembilan
+55,20.5,Male,Negeri Sembilan
+60,17.1,Male,Negeri Sembilan
+65,13.7,Male,Negeri Sembilan
+70,10.9,Male,Negeri Sembilan
+75,8.1,Male,Negeri Sembilan
+80,5.7,Male,Negeri Sembilan
+0,75.9,Female,Negeri Sembilan
+1,75.3,Female,Negeri Sembilan
+5,71.4,Female,Negeri Sembilan
+10,66.5,Female,Negeri Sembilan
+15,61.5,Female,Negeri Sembilan
+20,56.6,Female,Negeri Sembilan
+25,51.7,Female,Negeri Sembilan
+30,46.9,Female,Negeri Sembilan
+35,42.1,Female,Negeri Sembilan
+40,37.3,Female,Negeri Sembilan
+45,32.8,Female,Negeri Sembilan
+50,28.3,Female,Negeri Sembilan
+55,24.1,Female,Negeri Sembilan
+60,20.0,Female,Negeri Sembilan
+65,16.1,Female,Negeri Sembilan
+70,12.6,Female,Negeri Sembilan
+75,9.4,Female,Negeri Sembilan
+80,6.7,Female,Negeri Sembilan
+0,69.9,Male,Pahang
+1,69.4,Male,Pahang
+5,65.6,Male,Pahang
+10,60.6,Male,Pahang
+15,55.8,Male,Pahang
+20,51.0,Male,Pahang
+25,46.3,Male,Pahang
+30,41.6,Male,Pahang
+35,37.0,Male,Pahang
+40,32.4,Male,Pahang
+45,28.0,Male,Pahang
+50,23.8,Male,Pahang
+55,19.9,Male,Pahang
+60,16.4,Male,Pahang
+65,13.1,Male,Pahang
+70,10.4,Male,Pahang
+75,7.8,Male,Pahang
+80,5.6,Male,Pahang
+0,75.1,Female,Pahang
+1,74.6,Female,Pahang
+5,70.7,Female,Pahang
+10,65.8,Female,Pahang
+15,60.8,Female,Pahang
+20,55.9,Female,Pahang
+25,51.0,Female,Pahang
+30,46.3,Female,Pahang
+35,41.5,Female,Pahang
+40,36.8,Female,Pahang
+45,32.3,Female,Pahang
+50,27.8,Female,Pahang
+55,23.6,Female,Pahang
+60,19.6,Female,Pahang
+65,15.8,Female,Pahang
+70,12.6,Female,Pahang
+75,9.6,Female,Pahang
+80,6.6,Female,Pahang
+0,70.1,Male,Perak
+1,69.6,Male,Perak
+5,65.7,Male,Perak
+10,60.8,Male,Perak
+15,55.8,Male,Perak
+20,51.1,Male,Perak
+25,46.3,Male,Perak
+30,41.6,Male,Perak
+35,37.0,Male,Perak
+40,32.4,Male,Perak
+45,28.1,Male,Perak
+50,24.0,Male,Perak
+55,20.4,Male,Perak
+60,17.1,Male,Perak
+65,13.8,Male,Perak
+70,10.8,Male,Perak
+75,8.1,Male,Perak
+80,5.7,Male,Perak
+0,76.2,Female,Perak
+1,75.7,Female,Perak
+5,71.8,Female,Perak
+10,66.8,Female,Perak
+15,61.9,Female,Perak
+20,56.9,Female,Perak
+25,52.0,Female,Perak
+30,47.2,Female,Perak
+35,42.4,Female,Perak
+40,37.8,Female,Perak
+45,33.2,Female,Perak
+50,28.7,Female,Perak
+55,24.5,Female,Perak
+60,20.5,Female,Perak
+65,16.5,Female,Perak
+70,13.0,Female,Perak
+75,9.6,Female,Perak
+80,6.8,Female,Perak
+0,69.5,Male,Perlis
+1,69.0,Male,Perlis
+5,65.2,Male,Perlis
+10,60.2,Male,Perlis
+15,55.3,Male,Perlis
+20,50.5,Male,Perlis
+25,45.8,Male,Perlis
+30,41.1,Male,Perlis
+35,36.6,Male,Perlis
+40,32.1,Male,Perlis
+45,27.7,Male,Perlis
+50,23.5,Male,Perlis
+55,19.7,Male,Perlis
+60,16.4,Male,Perlis
+65,13.2,Male,Perlis
+70,10.4,Male,Perlis
+75,7.8,Male,Perlis
+80,5.5,Male,Perlis
+0,75.5,Female,Perlis
+1,75.0,Female,Perlis
+5,71.1,Female,Perlis
+10,66.1,Female,Perlis
+15,61.2,Female,Perlis
+20,56.3,Female,Perlis
+25,51.4,Female,Perlis
+30,46.5,Female,Perlis
+35,41.9,Female,Perlis
+40,37.3,Female,Perlis
+45,32.7,Female,Perlis
+50,28.1,Female,Perlis
+55,23.8,Female,Perlis
+60,19.9,Female,Perlis
+65,16.1,Female,Perlis
+70,12.7,Female,Perlis
+75,9.4,Female,Perlis
+80,6.7,Female,Perlis
+0,71.3,Male,Pulau Pinang
+1,70.7,Male,Pulau Pinang
+5,66.8,Male,Pulau Pinang
+10,61.8,Male,Pulau Pinang
+15,56.9,Male,Pulau Pinang
+20,52.1,Male,Pulau Pinang
+25,47.4,Male,Pulau Pinang
+30,42.6,Male,Pulau Pinang
+35,37.8,Male,Pulau Pinang
+40,33.2,Male,Pulau Pinang
+45,28.7,Male,Pulau Pinang
+50,24.5,Male,Pulau Pinang
+55,20.5,Male,Pulau Pinang
+60,16.7,Male,Pulau Pinang
+65,13.1,Male,Pulau Pinang
+70,9.8,Male,Pulau Pinang
+75,7.0,Male,Pulau Pinang
+80,5.5,Male,Pulau Pinang
+0,76.5,Female,Pulau Pinang
+1,75.8,Female,Pulau Pinang
+5,71.9,Female,Pulau Pinang
+10,66.9,Female,Pulau Pinang
+15,62.0,Female,Pulau Pinang
+20,57.1,Female,Pulau Pinang
+25,52.2,Female,Pulau Pinang
+30,47.3,Female,Pulau Pinang
+35,42.4,Female,Pulau Pinang
+40,37.6,Female,Pulau Pinang
+45,32.9,Female,Pulau Pinang
+50,28.4,Female,Pulau Pinang
+55,23.9,Female,Pulau Pinang
+60,19.6,Female,Pulau Pinang
+65,15.6,Female,Pulau Pinang
+70,11.9,Female,Pulau Pinang
+75,8.7,Female,Pulau Pinang
+80,6.5,Female,Pulau Pinang
+0,71.9,Male,Sabah
+1,71.5,Male,Sabah
+5,67.7,Male,Sabah
+10,62.7,Male,Sabah
+15,57.8,Male,Sabah
+20,53.0,Male,Sabah
+25,48.1,Male,Sabah
+30,43.3,Male,Sabah
+35,38.5,Male,Sabah
+40,33.9,Male,Sabah
+45,29.4,Male,Sabah
+50,25.2,Male,Sabah
+55,21.3,Male,Sabah
+60,17.9,Male,Sabah
+65,15.0,Male,Sabah
+70,11.7,Male,Sabah
+75,8.6,Male,Sabah
+80,6.1,Male,Sabah
+0,75.9,Female,Sabah
+1,75.4,Female,Sabah
+5,71.6,Female,Sabah
+10,66.6,Female,Sabah
+15,61.7,Female,Sabah
+20,56.8,Female,Sabah
+25,51.9,Female,Sabah
+30,47.0,Female,Sabah
+35,42.1,Female,Sabah
+40,37.4,Female,Sabah
+45,32.7,Female,Sabah
+50,28.3,Female,Sabah
+55,24.2,Female,Sabah
+60,20.3,Female,Sabah
+65,16.8,Female,Sabah
+70,13.1,Female,Sabah
+75,9.8,Female,Sabah
+80,6.8,Female,Sabah
+0,72.1,Male,Sarawak
+1,71.5,Male,Sarawak
+5,67.7,Male,Sarawak
+10,62.8,Male,Sarawak
+15,57.9,Male,Sarawak
+20,53.1,Male,Sarawak
+25,48.4,Male,Sarawak
+30,43.8,Male,Sarawak
+35,39.2,Male,Sarawak
+40,34.7,Male,Sarawak
+45,30.4,Male,Sarawak
+50,26.3,Male,Sarawak
+55,22.3,Male,Sarawak
+60,18.6,Male,Sarawak
+65,14.8,Male,Sarawak
+70,11.5,Male,Sarawak
+75,8.4,Male,Sarawak
+80,6.1,Male,Sarawak
+0,77.2,Female,Sarawak
+1,76.6,Female,Sarawak
+5,72.7,Female,Sarawak
+10,67.8,Female,Sarawak
+15,62.9,Female,Sarawak
+20,58.0,Female,Sarawak
+25,53.1,Female,Sarawak
+30,48.2,Female,Sarawak
+35,43.5,Female,Sarawak
+40,38.7,Female,Sarawak
+45,34.1,Female,Sarawak
+50,29.7,Female,Sarawak
+55,25.3,Female,Sarawak
+60,21.1,Female,Sarawak
+65,17.0,Female,Sarawak
+70,13.3,Female,Sarawak
+75,9.7,Female,Sarawak
+80,7.0,Female,Sarawak
+0,74.4,Male,Selangor
+1,73.8,Male,Selangor
+5,69.9,Male,Selangor
+10,65.0,Male,Selangor
+15,60.0,Male,Selangor
+20,55.2,Male,Selangor
+25,50.5,Male,Selangor
+30,45.7,Male,Selangor
+35,41.0,Male,Selangor
+40,36.3,Male,Selangor
+45,31.8,Male,Selangor
+50,27.6,Male,Selangor
+55,23.6,Male,Selangor
+60,19.9,Male,Selangor
+65,16.4,Male,Selangor
+70,13.1,Male,Selangor
+75,9.8,Male,Selangor
+80,6.7,Male,Selangor
+0,78.8,Female,Selangor
+1,78.2,Female,Selangor
+5,74.3,Female,Selangor
+10,69.3,Female,Selangor
+15,64.4,Female,Selangor
+20,59.5,Female,Selangor
+25,54.6,Female,Selangor
+30,49.7,Female,Selangor
+35,44.8,Female,Selangor
+40,40.0,Female,Selangor
+45,35.3,Female,Selangor
+50,30.8,Female,Selangor
+55,26.4,Female,Selangor
+60,22.3,Female,Selangor
+65,18.4,Female,Selangor
+70,14.6,Female,Selangor
+75,11.0,Female,Selangor
+80,7.5,Female,Selangor
+0,68.8,Male,Terengganu
+1,68.4,Male,Terengganu
+5,64.5,Male,Terengganu
+10,59.6,Male,Terengganu
+15,54.7,Male,Terengganu
+20,49.9,Male,Terengganu
+25,45.2,Male,Terengganu
+30,40.5,Male,Terengganu
+35,35.8,Male,Terengganu
+40,31.4,Male,Terengganu
+45,27.1,Male,Terengganu
+50,23.0,Male,Terengganu
+55,19.2,Male,Terengganu
+60,15.7,Male,Terengganu
+65,12.5,Male,Terengganu
+70,9.6,Male,Terengganu
+75,7.0,Male,Terengganu
+80,5.3,Male,Terengganu
+0,73.6,Female,Terengganu
+1,73.0,Female,Terengganu
+5,69.2,Female,Terengganu
+10,64.2,Female,Terengganu
+15,59.3,Female,Terengganu
+20,54.4,Female,Terengganu
+25,49.5,Female,Terengganu
+30,44.7,Female,Terengganu
+35,40.0,Female,Terengganu
+40,35.3,Female,Terengganu
+45,30.7,Female,Terengganu
+50,26.4,Female,Terengganu
+55,22.2,Female,Terengganu
+60,18.3,Female,Terengganu
+65,14.7,Female,Terengganu
+70,11.5,Female,Terengganu
+75,8.4,Female,Terengganu
+80,6.1,Female,Terengganu
+0,73.3,Male,WP Kuala Lumpur
+1,72.7,Male,WP Kuala Lumpur
+5,68.8,Male,WP Kuala Lumpur
+10,63.8,Male,WP Kuala Lumpur
+15,58.9,Male,WP Kuala Lumpur
+20,54.0,Male,WP Kuala Lumpur
+25,49.2,Male,WP Kuala Lumpur
+30,44.5,Male,WP Kuala Lumpur
+35,39.7,Male,WP Kuala Lumpur
+40,34.9,Male,WP Kuala Lumpur
+45,30.2,Male,WP Kuala Lumpur
+50,25.7,Male,WP Kuala Lumpur
+55,21.6,Male,WP Kuala Lumpur
+60,18.0,Male,WP Kuala Lumpur
+65,14.8,Male,WP Kuala Lumpur
+70,12.1,Male,WP Kuala Lumpur
+75,9.2,Male,WP Kuala Lumpur
+80,6.2,Male,WP Kuala Lumpur
+0,77.9,Female,WP Kuala Lumpur
+1,77.3,Female,WP Kuala Lumpur
+5,73.4,Female,WP Kuala Lumpur
+10,68.5,Female,WP Kuala Lumpur
+15,63.5,Female,WP Kuala Lumpur
+20,58.6,Female,WP Kuala Lumpur
+25,53.7,Female,WP Kuala Lumpur
+30,48.8,Female,WP Kuala Lumpur
+35,44.0,Female,WP Kuala Lumpur
+40,39.1,Female,WP Kuala Lumpur
+45,34.3,Female,WP Kuala Lumpur
+50,29.7,Female,WP Kuala Lumpur
+55,25.3,Female,WP Kuala Lumpur
+60,21.2,Female,WP Kuala Lumpur
+65,17.4,Female,WP Kuala Lumpur
+70,14.0,Female,WP Kuala Lumpur
+75,10.5,Female,WP Kuala Lumpur
+80,7.2,Female,WP Kuala Lumpur
+0,73.9,Male,WP Labuan
+1,73.6,Male,WP Labuan
+5,69.8,Male,WP Labuan
+10,64.9,Male,WP Labuan
+15,60.0,Male,WP Labuan
+20,55.1,Male,WP Labuan
+25,50.3,Male,WP Labuan
+30,45.6,Male,WP Labuan
+35,40.8,Male,WP Labuan
+40,36.1,Male,WP Labuan
+45,31.3,Male,WP Labuan
+50,26.9,Male,WP Labuan
+55,22.7,Male,WP Labuan
+60,19.1,Male,WP Labuan
+65,15.2,Male,WP Labuan
+70,12.3,Male,WP Labuan
+75,9.3,Male,WP Labuan
+80,6.4,Male,WP Labuan
+0,77.8,Female,WP Labuan
+1,77.4,Female,WP Labuan
+5,73.4,Female,WP Labuan
+10,68.5,Female,WP Labuan
+15,63.6,Female,WP Labuan
+20,58.7,Female,WP Labuan
+25,53.8,Female,WP Labuan
+30,48.9,Female,WP Labuan
+35,44.0,Female,WP Labuan
+40,39.2,Female,WP Labuan
+45,34.6,Female,WP Labuan
+50,29.9,Female,WP Labuan
+55,25.5,Female,WP Labuan
+60,21.3,Female,WP Labuan
+65,17.3,Female,WP Labuan
+70,13.3,Female,WP Labuan
+75,9.5,Female,WP Labuan
+80,7.0,Female,WP Labuan
+0,71.4,Male,WP Putrajaya
+1,71.3,Male,WP Putrajaya
+5,67.4,Male,WP Putrajaya
+10,62.4,Male,WP Putrajaya
+15,57.5,Male,WP Putrajaya
+20,52.6,Male,WP Putrajaya
+25,47.9,Male,WP Putrajaya
+30,43.0,Male,WP Putrajaya
+35,38.2,Male,WP Putrajaya
+40,33.4,Male,WP Putrajaya
+45,28.7,Male,WP Putrajaya
+50,24.1,Male,WP Putrajaya
+55,19.7,Male,WP Putrajaya
+60,15.7,Male,WP Putrajaya
+65,12.0,Male,WP Putrajaya
+70,8.9,Male,WP Putrajaya
+75,6.0,Male,WP Putrajaya
+80,5.1,Male,WP Putrajaya
+0,76.1,Female,WP Putrajaya
+1,75.6,Female,WP Putrajaya
+5,71.7,Female,WP Putrajaya
+10,66.7,Female,WP Putrajaya
+15,61.7,Female,WP Putrajaya
+20,56.7,Female,WP Putrajaya
+25,51.9,Female,WP Putrajaya
+30,47.0,Female,WP Putrajaya
+35,42.2,Female,WP Putrajaya
+40,37.3,Female,WP Putrajaya
+45,32.5,Female,WP Putrajaya
+50,27.7,Female,WP Putrajaya
+55,23.0,Female,WP Putrajaya
+60,18.7,Female,WP Putrajaya
+65,14.8,Female,WP Putrajaya
+70,11.8,Female,WP Putrajaya
+75,9.0,Female,WP Putrajaya
+80,6.5,Female,WP Putrajaya
