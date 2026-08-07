@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'scoring',
     'assessments',
+    'clinics',
 ]
 
 REST_FRAMEWORK = {
