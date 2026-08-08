@@ -73,6 +73,9 @@ const config: Config = {
       minHeight: {
         tap: "48px",
       },
+      height: {
+        tap: "48px",
+      },
       boxShadow: {
         panel: "0 1px 2px 0 rgb(16 24 40 / 0.04)",
         popover:

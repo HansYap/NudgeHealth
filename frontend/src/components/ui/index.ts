@@ -54,3 +54,9 @@ export type { HintLineProps } from "./HintLine";
 
 export { SettingRow } from "./SettingRow";
 export type { SettingRowProps } from "./SettingRow";
+
+export { SliderField } from "./SliderField";
+export type { SliderFieldProps } from "./SliderField";
+
+export { StepProgress } from "./StepProgress";
+export type { StepProgressProps, StepDefinition } from "./StepProgress";

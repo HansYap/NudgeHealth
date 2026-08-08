@@ -98,5 +98,114 @@
     "settingsTitle": "Tetapan",
     "language": "Bahasa",
     "logout": "Log keluar"
+  },
+  "onboarding": {
+    "eyebrows": {
+      "1": "Langkah 1 · Asas anda",
+      "2": "Langkah 2 · Gaya hidup anda",
+      "3": "Langkah 3 · Sejarah kesihatan anda",
+      "done": "Pendaftaran asas selesai"
+    },
+    "stepLabels": [
+      "Asas",
+      "Gaya hidup",
+      "Sejarah kesihatan"
+    ],
+    "counter": "{answered} daripada {total} dijawab",
+    "headings": {
+      "1": "Mari dapatkan asas anda",
+      "2": "Ceritakan tentang gaya hidup anda",
+      "3": "Sedikit tentang sejarah kesihatan anda"
+    },
+    "subs": {
+      "1": "Tiga soalan pantas, tiada taipan diperlukan — digunakan untuk memperibadikan keputusan anda.",
+      "2": "Jawapan ini secara langsung membentuk skor peribadi anda.",
+      "3": "Ini tidak mengubah skor anda — ia hanya membantu kami menyesuaikan tindakan yang disyorkan."
+    },
+    "questions": {
+      "age": "Berapakah umur anda?",
+      "sex": "Apakah jantina biologi anda?",
+      "state": "Anda tinggal di negeri mana?",
+      "smoking": "Adakah anda merokok, atau pernah merokok secara kerap?",
+      "height": "Berapakah tinggi anda?",
+      "weight": "Berapakah berat anda?",
+      "activity": "Dalam seminggu biasa, berapa banyak aktiviti sederhana hingga cergas yang anda lakukan?",
+      "sodium": "Adakah anda kerap menambah garam atau kicap pada makanan, atau makan makanan diproses/awet?",
+      "fruitveg": "Pada kebanyakan hari, adakah anda makan sekurang-kurangnya 2 hidangan buah dan 3 sayur?",
+      "screening": "Pernahkah anda menjalani pemeriksaan kesihatan umum (tekanan darah, glukosa darah, kolesterol) dalam 2 tahun lepas?",
+      "diabetes": "Pernahkah anda didiagnosis dengan diabetes?",
+      "hypertension": "Pernahkah anda didiagnosis dengan hipertensi (tekanan darah tinggi)?",
+      "cholesterol": "Pernahkah anda didiagnosis dengan kolesterol tinggi?"
+    },
+    "hints": {
+      "activity": "Termasuk berjalan pantas, berbasikal, berenang dan aktiviti serupa."
+    },
+    "units": {
+      "age": "tahun",
+      "height": "cm",
+      "weight": "kg"
+    },
+    "sliderHint": "Seret penggelongsor untuk menjawab",
+    "options": {
+      "sex": [
+        {
+          "value": "male",
+          "label": "Lelaki"
+        },
+        {
+          "value": "female",
+          "label": "Perempuan"
+        }
+      ],
+      "smoking": [
+        {
+          "value": "never",
+          "label": "Tidak pernah merokok"
+        },
+        {
+          "value": "quit5plus",
+          "label": "Berhenti 5+ tahun lalu"
+        },
+        {
+          "value": "quitunder5",
+          "label": "Berhenti kurang 5 tahun lalu"
+        },
+        {
+          "value": "current",
+          "label": "Sedang merokok"
+        }
+      ],
+      "activity": [
+        {
+          "value": "under150",
+          "label": "Kurang 150 min/minggu"
+        },
+        {
+          "value": "over150",
+          "label": "150 min/minggu atau lebih"
+        }
+      ],
+      "yesno": [
+        {
+          "value": "yes",
+          "label": "Ya"
+        },
+        {
+          "value": "no",
+          "label": "Tidak"
+        }
+      ]
+    },
+    "selectPlaceholder": "Pilih…",
+    "errors": {
+      "choice": "Pilih satu pilihan untuk meneruskan.",
+      "slider": "Seret penggelongsor untuk menjawab sebelum meneruskan."
+    },
+    "back": "Kembali",
+    "continueLabel": "Teruskan",
+    "finish": "Lihat skor risiko saya",
+    "trustNote": "Kekal dalam akaun anda — kami tidak pernah berkongsi dengan sesiapa",
+    "doneTitle": "Pendaftaran asas selesai",
+    "doneBody": "Skor risiko peribadi dan pelan bulanan anda sudah sedia."
   }
 }

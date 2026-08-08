@@ -24,6 +24,7 @@ Other scripts:
 | --- | --- | --- |
 | Login | `src/pages/LoginPage.tsx` | |
 | Sign up | `src/pages/SignupPage.tsx` | |
+| Onboarding | `src/pages/OnboardingPage.tsx` | 3-step baseline questionnaire |
 | Home | `src/pages/HomePage.tsx` | Risk summary + this month's focus |
 | Risk detail | `src/pages/RiskDetailPage.tsx` | Sub-page of Home |
 | Plan | `src/pages/PlanPage.tsx` | Ranked recommendations |
@@ -33,6 +34,19 @@ Other scripts:
 
 Navigation is currently a `useState` switch in `src/App.tsx`. Swap it for
 `react-router` when routes need to be linkable.
+
+**Onboarding gate:** the app has no meaningful state before the baseline
+questionnaire is completed, so `App.tsx` sends the user to onboarding
+after login/signup whenever `baseline` is null, and falls back to it if
+any app route is reached without one. The baseline belongs to the
+account rather than the session — returning users skip onboarding and
+land on Home.
+
+When the real API lands, replace the local `baseline` state with a "has
+completed assessment" flag fetched on login. The redirect logic itself
+can stay as is. Note that in the current demo the flag is component
+state, so a browser refresh resets it and onboarding shows again; that
+goes away once it comes from the server.
 
 ## Backend integration points
 

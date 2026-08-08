@@ -98,5 +98,114 @@
     "settingsTitle": "Settings",
     "language": "Language",
     "logout": "Log out"
+  },
+  "onboarding": {
+    "eyebrows": {
+      "1": "Step 1 · Your baseline",
+      "2": "Step 2 · Your lifestyle",
+      "3": "Step 3 · Your health history",
+      "done": "Baseline check-in complete"
+    },
+    "stepLabels": [
+      "Baseline",
+      "Lifestyle",
+      "Health history"
+    ],
+    "counter": "{answered} of {total} answered",
+    "headings": {
+      "1": "Let's get your baseline",
+      "2": "Tell us about your lifestyle",
+      "3": "A little about your health history"
+    },
+    "subs": {
+      "1": "Three quick questions, no typing needed — used to personalise your results, never shown as raw numbers.",
+      "2": "These answers directly shape your personalised score.",
+      "3": "This won't change your score — it just helps us tailor which actions we recommend."
+    },
+    "questions": {
+      "age": "How old are you?",
+      "sex": "What's your biological sex?",
+      "state": "Which state do you live in?",
+      "smoking": "Do you smoke, or have you ever smoked regularly?",
+      "height": "What's your height?",
+      "weight": "What's your weight?",
+      "activity": "In a typical week, how much moderate-to-vigorous activity do you get?",
+      "sodium": "Do you often add extra salt or soy sauce to meals, or eat processed/preserved food?",
+      "fruitveg": "On most days, do you eat at least 2 servings of fruit and 3 of vegetables?",
+      "screening": "Have you had a general health screening (blood pressure, blood glucose, cholesterol) in the past 2 years?",
+      "diabetes": "Have you been diagnosed with diabetes?",
+      "hypertension": "Have you been diagnosed with hypertension (high blood pressure)?",
+      "cholesterol": "Have you been diagnosed with high cholesterol?"
+    },
+    "hints": {
+      "activity": "Counts brisk walking, cycling, swimming and similar activity."
+    },
+    "units": {
+      "age": "years old",
+      "height": "cm",
+      "weight": "kg"
+    },
+    "sliderHint": "Drag the slider to answer",
+    "options": {
+      "sex": [
+        {
+          "value": "male",
+          "label": "Male"
+        },
+        {
+          "value": "female",
+          "label": "Female"
+        }
+      ],
+      "smoking": [
+        {
+          "value": "never",
+          "label": "Never smoked"
+        },
+        {
+          "value": "quit5plus",
+          "label": "Quit 5+ years ago"
+        },
+        {
+          "value": "quitunder5",
+          "label": "Quit under 5 years ago"
+        },
+        {
+          "value": "current",
+          "label": "Currently smoke"
+        }
+      ],
+      "activity": [
+        {
+          "value": "under150",
+          "label": "Under 150 min/week"
+        },
+        {
+          "value": "over150",
+          "label": "150 min/week or more"
+        }
+      ],
+      "yesno": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    "selectPlaceholder": "Select…",
+    "errors": {
+      "choice": "Choose one option to continue.",
+      "slider": "Drag the slider to answer before continuing."
+    },
+    "back": "Back",
+    "continueLabel": "Continue",
+    "finish": "See my risk score",
+    "trustNote": "Stays on your account — we never share it with anyone else",
+    "doneTitle": "Baseline check-in complete",
+    "doneBody": "Your personalised risk score and monthly plan are ready."
   }
 }

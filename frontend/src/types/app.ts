@@ -1,10 +1,17 @@
 // Shared domain types for the authenticated app screens.
 import type { RiskBand } from "../components/ui/RiskBand";
 
-export type AppRoute = "home" | "risk" | "plan" | "clinic" | "diary" | "profile";
+export type AppRoute =
+  | "onboarding"
+  | "home"
+  | "risk"
+  | "plan"
+  | "clinic"
+  | "diary"
+  | "profile";
 
 /** Left-nav destinations (Design System 04). "risk" is a sub-page of home. */
-export type NavRoute = Exclude<AppRoute, "risk" | "clinic">;
+export type NavRoute = Exclude<AppRoute, "risk" | "clinic" | "onboarding">;
 
 export interface RiskSummary {
   band: RiskBand;

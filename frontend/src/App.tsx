@@ -7,6 +7,8 @@ import { PlanPage } from "./pages/PlanPage";
 import { ClinicPage } from "./pages/ClinicPage";
 import { DiaryPage } from "./pages/DiaryPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { OnboardingPage } from "./pages/OnboardingPage";
+import type { OnboardingAnswers } from "./lib/onboardingConfig";
 import { AppShell } from "./components/layout/AppShell";
 import type { AppRoute, NavRoute } from "./types/app";
 import type { Locale } from "./types/auth";
@@ -30,12 +32,21 @@ type Route = "login" | "signup" | AppRoute;
 export default function App() {
   const [route, setRoute] = useState<Route>("login");
   const [locale, setLocale] = useState<Locale>("en");
+  // Null until the baseline questionnaire has been completed. Everything
+  // in the app depends on it, so there is no meaningful Home without it.
+  const [baseline, setBaseline] = useState<OnboardingAnswers | null>(null);
+  // Set when onboarding was opened from Profile, so we can return there
+  // instead of dropping the user on Home.
+  const [retakeOrigin, setRetakeOrigin] = useState<AppRoute | null>(null);
   const t = COPY[locale];
+
+  /** After auth, send the user to onboarding unless they already have a baseline. */
+  const enterApp = () => setRoute(baseline ? "home" : "onboarding");
 
   if (route === "login") {
     return (
       <LoginPage
-        onLoginSuccess={() => setRoute("home")}
+        onLoginSuccess={enterApp}
         onNavigateToSignup={() => setRoute("signup")}
         onNavigateToForgotPassword={() => {
           // TODO: wire up routing to /forgot-password
@@ -47,8 +58,24 @@ export default function App() {
   if (route === "signup") {
     return (
       <SignupPage
-        onSignupSuccess={() => setRoute("home")}
+        onSignupSuccess={() => setRoute("onboarding")}
         onNavigateToLogin={() => setRoute("login")}
+      />
+    );
+  }
+
+  // Guard: no score, plan or history exists before the baseline is done,
+  // so any app route reached without one falls back to onboarding.
+  if (route === "onboarding" || baseline === null) {
+    return (
+      <OnboardingPage
+        copy={t.onboarding}
+        initialAnswers={baseline ?? undefined}
+        onComplete={setBaseline}
+        onSeeScore={() => {
+          setRoute(retakeOrigin ?? "home");
+          setRetakeOrigin(null);
+        }}
       />
     );
   }
@@ -110,7 +137,16 @@ export default function App() {
             risk={{ ...MOCK_RISK, label: t.risk.bands.moderate }}
             locale={locale}
             onLocaleChange={setLocale}
-            onLogout={() => setRoute("login")}
+            onRetakeAssessment={() => {
+              setRetakeOrigin("profile");
+              setRoute("onboarding");
+            }}
+            onLogout={() => {
+              // The baseline belongs to the account, not the session, so it
+              // survives logout — returning users go straight to Home.
+              setRetakeOrigin(null);
+              setRoute("login");
+            }}
           />
         );
       default:
