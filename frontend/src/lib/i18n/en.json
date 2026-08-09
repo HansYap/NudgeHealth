@@ -57,7 +57,7 @@
     "bands": {
       "low": "Low",
       "moderate": "Moderate",
-      "high": "Elevated"
+      "high": "High"
     }
   },
   "plan": {

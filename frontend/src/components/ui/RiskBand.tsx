@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
-import { CircleCheck, TriangleAlert, Plus } from "lucide-react";
+import { Circle, TriangleAlert, Plus } from "lucide-react";
 
 // Maps 1:1 to backend RiskAssessment.RISK_BAND_CHOICES ("low" | "moderate" | "high").
-// UI copy shows "high" as "Elevated" per Design System 05.
 export type RiskBand = "low" | "moderate" | "high";
 
 export interface BandTokens {
@@ -18,7 +17,7 @@ export const BAND_TOKENS: Record<RiskBand, BandTokens> = {
     bg: "bg-sage",
     bgSoft: "bg-sage-light",
     text: "text-sage",
-    icon: <CircleCheck className="h-full w-full" aria-hidden="true" />,
+    icon: <Circle className="h-full w-full" aria-hidden="true" strokeWidth={3} />,
     defaultLabel: "Low",
   },
   moderate: {
@@ -33,7 +32,7 @@ export const BAND_TOKENS: Record<RiskBand, BandTokens> = {
     bgSoft: "bg-rust-light",
     text: "text-rust",
     icon: <Plus className="h-full w-full" aria-hidden="true" strokeWidth={3} />,
-    defaultLabel: "Elevated",
+    defaultLabel: "High",
   },
 };
 
@@ -74,8 +73,7 @@ export interface RiskBandCardProps {
 }
 
 /**
- * Full-width risk band card, as shown in Design System 05 (three stacked
- * cards: Low / Moderate / Elevated), each with a solid icon chip, bold
+ * Full-width risk band card: Low / Moderate / High, each with a solid icon chip, bold
  * label, and a short next-step message.
  */
 export function RiskBandCard({ band, label, message }: RiskBandCardProps) {

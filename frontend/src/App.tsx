@@ -19,11 +19,13 @@ import type {
 } from "./types/auth";
 import { ApiError, logout as logoutFromApi, me } from "./lib/api/auth";
 import {
+  type AssessmentResponse,
   getCurrentAssessment,
   submitBaselineAssessment,
 } from "./lib/api/assessments";
 import { clearAuthTokens, hasAuthTokens } from "./lib/auth/tokens";
 import { getSavedLocale, saveLocale } from "./lib/i18n/locale";
+import { assessmentToRiskSummary } from "./lib/adapters/risk";
 import {
   MOCK_RISK,
   MOCK_TASKS,
@@ -51,6 +53,8 @@ export default function App() {
   const [hasCompletedAssessment, setHasCompletedAssessment] = useState<
     boolean | null
   >(hasAuthTokens() ? null : false);
+  const [currentAssessment, setCurrentAssessment] =
+    useState<AssessmentResponse | null>(null);
   const [baseline, setBaseline] = useState<OnboardingAnswers | null>(null);
   // Set when onboarding was opened from Profile, so we can return there
   // instead of dropping the user on Home.
@@ -104,11 +108,13 @@ export default function App() {
 
   const syncAssessmentState = async () => {
     try {
-      await getCurrentAssessment();
+      const assessment = await getCurrentAssessment();
+      setCurrentAssessment(assessment);
       setHasCompletedAssessment(true);
       return true;
     } catch (error) {
       if (error instanceof ApiError && error.status === 404) {
+        setCurrentAssessment(null);
         setHasCompletedAssessment(false);
         return false;
       }
@@ -133,7 +139,8 @@ export default function App() {
   };
 
   const completeBaseline = async (answers: OnboardingAnswers) => {
-    await submitBaselineAssessment(answers);
+    const assessment = await submitBaselineAssessment(answers);
+    setCurrentAssessment(assessment);
     setBaseline(answers);
     setHasCompletedAssessment(true);
   };
@@ -146,6 +153,7 @@ export default function App() {
     } finally {
       setIsAuthenticated(false);
       setCurrentUser(null);
+      setCurrentAssessment(null);
       setHasCompletedAssessment(false);
       setRetakeOrigin(null);
       setRoute("login");
@@ -225,6 +233,14 @@ export default function App() {
   const activeNav: NavRoute =
     route === "risk" ? "home" : route === "clinic" ? "plan" : route;
 
+  const risk = currentAssessment
+    ? assessmentToRiskSummary(currentAssessment, locale, t.risk.bands)
+    : null;
+  const fallbackRisk = {
+    ...MOCK_RISK,
+    label: t.risk.bands[MOCK_RISK.band],
+  };
+
   const renderPage = () => {
     switch (route) {
       case "risk":
@@ -238,7 +254,7 @@ export default function App() {
               contributingTitle: t.risk.contributingTitle,
               seePlan: t.risk.seePlan,
             }}
-            risk={{ ...MOCK_RISK, label: t.risk.bands.moderate }}
+            risk={risk ?? fallbackRisk}
             factors={MOCK_FACTORS}
             onBack={() => setRoute("home")}
             onSeePlan={() => setRoute("plan")}
@@ -267,7 +283,7 @@ export default function App() {
           <ProfilePage
             copy={t.profile}
             email={currentUser?.email ?? ""}
-            risk={{ ...MOCK_RISK, label: t.risk.bands.moderate }}
+            risk={risk ?? fallbackRisk}
             locale={locale}
             onLocaleChange={setLocale}
             onRetakeAssessment={() => {
@@ -281,10 +297,11 @@ export default function App() {
         return (
           <HomePage
             copy={t.home}
-            risk={{ ...MOCK_RISK, label: t.risk.bands.moderate }}
+            risk={risk}
             tasks={MOCK_TASKS}
             onViewRiskDetail={() => setRoute("risk")}
             onViewFullPlan={() => setRoute("plan")}
+            onRetryScore={syncAssessmentState}
           />
         );
     }
