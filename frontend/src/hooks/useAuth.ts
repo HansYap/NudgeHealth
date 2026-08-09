@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { getLoginErrorMessage, loginWithPassword } from "../lib/api/auth";
 import type { LoginFormValues, LoginSubmitResult } from "../types/auth";
 
 interface UseAuthReturn {
@@ -8,10 +9,7 @@ interface UseAuthReturn {
   clearError: () => void;
 }
 
-/**
- * Encapsulates the login request lifecycle (loading/error state).
- * Actual network call is injected/replaced with a real API client later.
- */
+/** Encapsulates the login request lifecycle (loading/error state). */
 export function useAuth(): UseAuthReturn {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,21 +20,10 @@ export function useAuth(): UseAuthReturn {
       setError(null);
 
       try {
-        // TODO: replace with a real API call, e.g.
-        // const res = await fetch("/api/login", { method: "POST", body: JSON.stringify(values) });
-        void values;
-        const result: LoginSubmitResult = await Promise.resolve({
-          success: true,
-        });
-
-        if (!result.success) {
-          setError(result.error ?? "Unable to log in. Please try again.");
-        }
-
-        return result;
+        const user = await loginWithPassword(values);
+        return { success: true, user: user ?? undefined };
       } catch (err) {
-        const message =
-          err instanceof Error ? err.message : "Something went wrong.";
+        const message = getLoginErrorMessage(err);
         setError(message);
         return { success: false, error: message };
       } finally {

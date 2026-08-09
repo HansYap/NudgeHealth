@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import { getSignupErrorMessage, login, me, register } from "../lib/api/auth";
+import { saveAuthTokens } from "../lib/auth/tokens";
 import type { SignupFormValues, SignupSubmitResult } from "../types/auth";
 
 interface UseSignupReturn {
@@ -8,10 +10,7 @@ interface UseSignupReturn {
   clearError: () => void;
 }
 
-/**
- * Mirrors useAuth for the signup request lifecycle.
- * Swap the body of `signup` for the real accounts API call later.
- */
+/** Mirrors useAuth for the signup request lifecycle. */
 export function useSignup(): UseSignupReturn {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,23 +21,14 @@ export function useSignup(): UseSignupReturn {
       setError(null);
 
       try {
-        // TODO: replace with a real API call, e.g.
-        // const res = await fetch("/api/accounts/signup", { method: "POST", ... });
-        void values;
-        const result: SignupSubmitResult = await Promise.resolve({
-          success: true,
-        });
+        await register(values);
+        const tokens = await login(values.email, values.password);
+        saveAuthTokens(tokens);
+        const user = await me();
 
-        if (!result.success) {
-          setError(
-            result.error ?? "Unable to create your account. Please try again."
-          );
-        }
-
-        return result;
+        return { success: true, user: user ?? undefined };
       } catch (err) {
-        const message =
-          err instanceof Error ? err.message : "Something went wrong.";
+        const message = getSignupErrorMessage(err);
         setError(message);
         return { success: false, error: message };
       } finally {

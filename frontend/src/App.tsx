@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
 import { HomePage } from "./pages/HomePage";
@@ -11,7 +11,9 @@ import { OnboardingPage } from "./pages/OnboardingPage";
 import type { OnboardingAnswers } from "./lib/onboardingConfig";
 import { AppShell } from "./components/layout/AppShell";
 import type { AppRoute, NavRoute } from "./types/app";
-import type { Locale } from "./types/auth";
+import type { AuthUser, Locale, LoginSubmitResult, SignupSubmitResult } from "./types/auth";
+import { logout as logoutFromApi, me } from "./lib/api/auth";
+import { clearAuthTokens, hasAuthTokens } from "./lib/auth/tokens";
 import {
   MOCK_RISK,
   MOCK_TASKS,
@@ -19,7 +21,6 @@ import {
   MOCK_PLAN,
   MOCK_CLINICS,
   MOCK_DIARY,
-  MOCK_USER,
 } from "./lib/mockData";
 
 import en from "./lib/i18n/en.json";
@@ -30,7 +31,11 @@ const COPY: Record<Locale, typeof en> = { en, bm };
 type Route = "login" | "signup" | AppRoute;
 
 export default function App() {
-  const [route, setRoute] = useState<Route>("login");
+  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthTokens);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [route, setRoute] = useState<Route>(() =>
+    hasAuthTokens() ? "home" : "login"
+  );
   const [locale, setLocale] = useState<Locale>("en");
   // Null until the baseline questionnaire has been completed. Everything
   // in the app depends on it, so there is no meaningful Home without it.
@@ -40,13 +45,56 @@ export default function App() {
   const [retakeOrigin, setRetakeOrigin] = useState<AppRoute | null>(null);
   const t = COPY[locale];
 
-  /** After auth, send the user to onboarding unless they already have a baseline. */
-  const enterApp = () => setRoute(baseline ? "home" : "onboarding");
+  useEffect(() => {
+    if (!isAuthenticated || currentUser) return;
+
+    me()
+      .then((user) => {
+        if (user) {
+          setCurrentUser(user);
+          return;
+        }
+
+        clearAuthTokens();
+        setIsAuthenticated(false);
+        setRoute("login");
+      })
+      .catch(() => {
+        clearAuthTokens();
+        setIsAuthenticated(false);
+        setRoute("login");
+      });
+  }, [currentUser, isAuthenticated]);
+
+  const completeLogin = (result?: LoginSubmitResult) => {
+    setCurrentUser(result?.user ?? null);
+    setIsAuthenticated(true);
+    setRoute("home");
+  };
+
+  const completeSignup = (result?: SignupSubmitResult) => {
+    setCurrentUser(result?.user ?? null);
+    setIsAuthenticated(true);
+    setRoute("onboarding");
+  };
+
+  const endSession = async () => {
+    try {
+      await logoutFromApi();
+    } catch {
+      clearAuthTokens();
+    } finally {
+      setIsAuthenticated(false);
+      setCurrentUser(null);
+      setRetakeOrigin(null);
+      setRoute("login");
+    }
+  };
 
   if (route === "login") {
     return (
       <LoginPage
-        onLoginSuccess={enterApp}
+        onLoginSuccess={completeLogin}
         onNavigateToSignup={() => setRoute("signup")}
         onNavigateToForgotPassword={() => {
           // TODO: wire up routing to /forgot-password
@@ -58,15 +106,27 @@ export default function App() {
   if (route === "signup") {
     return (
       <SignupPage
-        onSignupSuccess={() => setRoute("onboarding")}
+        onSignupSuccess={completeSignup}
         onNavigateToLogin={() => setRoute("login")}
       />
     );
   }
 
-  // Guard: no score, plan or history exists before the baseline is done,
-  // so any app route reached without one falls back to onboarding.
-  if (route === "onboarding" || baseline === null) {
+  if (!isAuthenticated) {
+    return (
+      <LoginPage
+        onLoginSuccess={completeLogin}
+        onNavigateToSignup={() => setRoute("signup")}
+        onNavigateToForgotPassword={() => {
+          // TODO: wire up routing to /forgot-password
+        }}
+      />
+    );
+  }
+
+  // Signup still lands on onboarding. Returning login lands on Home; assessment
+  // existence will be wired to the backend in the assessment stories.
+  if (route === "onboarding") {
     return (
       <OnboardingPage
         copy={t.onboarding}
@@ -133,7 +193,7 @@ export default function App() {
         return (
           <ProfilePage
             copy={t.profile}
-            email={MOCK_USER.email}
+            email={currentUser?.email ?? ""}
             risk={{ ...MOCK_RISK, label: t.risk.bands.moderate }}
             locale={locale}
             onLocaleChange={setLocale}
@@ -141,12 +201,7 @@ export default function App() {
               setRetakeOrigin("profile");
               setRoute("onboarding");
             }}
-            onLogout={() => {
-              // The baseline belongs to the account, not the session, so it
-              // survives logout — returning users go straight to Home.
-              setRetakeOrigin(null);
-              setRoute("login");
-            }}
+            onLogout={endSession}
           />
         );
       default:

@@ -3,7 +3,7 @@
 export type Locale = "en" | "bm";
 
 export interface LoginFormValues {
-  identifier: string; // email or phone number
+  identifier: string;
   password: string;
 }
 
