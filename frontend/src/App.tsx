@@ -11,9 +11,19 @@ import { OnboardingPage } from "./pages/OnboardingPage";
 import type { OnboardingAnswers } from "./lib/onboardingConfig";
 import { AppShell } from "./components/layout/AppShell";
 import type { AppRoute, NavRoute } from "./types/app";
-import type { AuthUser, Locale, LoginSubmitResult, SignupSubmitResult } from "./types/auth";
-import { logout as logoutFromApi, me } from "./lib/api/auth";
+import type {
+  AuthUser,
+  Locale,
+  LoginSubmitResult,
+  SignupSubmitResult,
+} from "./types/auth";
+import { ApiError, logout as logoutFromApi, me } from "./lib/api/auth";
+import {
+  getCurrentAssessment,
+  submitBaselineAssessment,
+} from "./lib/api/assessments";
 import { clearAuthTokens, hasAuthTokens } from "./lib/auth/tokens";
+import { getSavedLocale, saveLocale } from "./lib/i18n/locale";
 import {
   MOCK_RISK,
   MOCK_TASKS,
@@ -32,50 +42,100 @@ type Route = "login" | "signup" | AppRoute;
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthTokens);
+  const [isBootstrapping, setIsBootstrapping] = useState(hasAuthTokens);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const [route, setRoute] = useState<Route>(() =>
     hasAuthTokens() ? "home" : "login"
   );
-  const [locale, setLocale] = useState<Locale>("en");
-  // Null until the baseline questionnaire has been completed. Everything
-  // in the app depends on it, so there is no meaningful Home without it.
+  const [locale, setLocaleState] = useState<Locale>(getSavedLocale);
+  const [hasCompletedAssessment, setHasCompletedAssessment] = useState<
+    boolean | null
+  >(hasAuthTokens() ? null : false);
   const [baseline, setBaseline] = useState<OnboardingAnswers | null>(null);
   // Set when onboarding was opened from Profile, so we can return there
   // instead of dropping the user on Home.
   const [retakeOrigin, setRetakeOrigin] = useState<AppRoute | null>(null);
   const t = COPY[locale];
 
+  const setLocale = (nextLocale: Locale) => {
+    setLocaleState(nextLocale);
+    saveLocale(nextLocale);
+  };
+
   useEffect(() => {
-    if (!isAuthenticated || currentUser) return;
+    if (!hasAuthTokens()) return;
 
-    me()
-      .then((user) => {
+    let cancelled = false;
+
+    const bootstrapSession = async () => {
+      try {
+        const user = await me();
         if (user) {
+          if (cancelled) return;
           setCurrentUser(user);
-          return;
+          const hasAssessment = await syncAssessmentState();
+          if (!cancelled) setRoute(hasAssessment ? "home" : "onboarding");
+        } else {
+          clearAuthTokens();
+          if (!cancelled) {
+            setIsAuthenticated(false);
+            setHasCompletedAssessment(false);
+            setRoute("login");
+          }
         }
-
+      } catch {
         clearAuthTokens();
-        setIsAuthenticated(false);
-        setRoute("login");
-      })
-      .catch(() => {
-        clearAuthTokens();
-        setIsAuthenticated(false);
-        setRoute("login");
-      });
-  }, [currentUser, isAuthenticated]);
+        if (!cancelled) {
+          setIsAuthenticated(false);
+          setHasCompletedAssessment(false);
+          setRoute("login");
+        }
+      } finally {
+        if (!cancelled) setIsBootstrapping(false);
+      }
+    };
 
-  const completeLogin = (result?: LoginSubmitResult) => {
+    void bootstrapSession();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const syncAssessmentState = async () => {
+    try {
+      await getCurrentAssessment();
+      setHasCompletedAssessment(true);
+      return true;
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 404) {
+        setHasCompletedAssessment(false);
+        return false;
+      }
+
+      throw error;
+    }
+  };
+
+  const completeLogin = async (result?: LoginSubmitResult) => {
     setCurrentUser(result?.user ?? null);
     setIsAuthenticated(true);
-    setRoute("home");
+
+    const hasAssessment = await syncAssessmentState();
+    setRoute(hasAssessment ? "home" : "onboarding");
   };
 
   const completeSignup = (result?: SignupSubmitResult) => {
     setCurrentUser(result?.user ?? null);
     setIsAuthenticated(true);
+    setHasCompletedAssessment(false);
     setRoute("onboarding");
+  };
+
+  const completeBaseline = async (answers: OnboardingAnswers) => {
+    await submitBaselineAssessment(answers);
+    setBaseline(answers);
+    setHasCompletedAssessment(true);
   };
 
   const endSession = async () => {
@@ -86,6 +146,7 @@ export default function App() {
     } finally {
       setIsAuthenticated(false);
       setCurrentUser(null);
+      setHasCompletedAssessment(false);
       setRetakeOrigin(null);
       setRoute("login");
     }
@@ -99,6 +160,8 @@ export default function App() {
         onNavigateToForgotPassword={() => {
           // TODO: wire up routing to /forgot-password
         }}
+        locale={locale}
+        onLocaleChange={setLocale}
       />
     );
   }
@@ -108,7 +171,17 @@ export default function App() {
       <SignupPage
         onSignupSuccess={completeSignup}
         onNavigateToLogin={() => setRoute("login")}
+        locale={locale}
+        onLocaleChange={setLocale}
       />
+    );
+  }
+
+  if (isBootstrapping) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-alabaster px-6 text-body-sm text-slate-500">
+        Loading...
+      </div>
     );
   }
 
@@ -120,18 +193,18 @@ export default function App() {
         onNavigateToForgotPassword={() => {
           // TODO: wire up routing to /forgot-password
         }}
+        locale={locale}
+        onLocaleChange={setLocale}
       />
     );
   }
 
-  // Signup still lands on onboarding. Returning login lands on Home; assessment
-  // existence will be wired to the backend in the assessment stories.
-  if (route === "onboarding") {
+  if (route === "onboarding" || hasCompletedAssessment === false) {
     return (
       <OnboardingPage
         copy={t.onboarding}
         initialAnswers={baseline ?? undefined}
-        onComplete={setBaseline}
+        onComplete={completeBaseline}
         onSeeScore={() => {
           setRoute(retakeOrigin ?? "home");
           setRetakeOrigin(null);

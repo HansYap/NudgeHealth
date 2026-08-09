@@ -23,7 +23,7 @@ export interface OnboardingPageProps {
   /** Pre-fill when retaking the assessment from Profile */
   initialAnswers?: OnboardingAnswers;
   /** Fired with the completed answers when the user finishes */
-  onComplete?: (answers: OnboardingAnswers) => void;
+  onComplete?: (answers: OnboardingAnswers) => void | Promise<void>;
   /** Shown as a "See my risk score" destination handler */
   onSeeScore?: () => void;
 }
@@ -67,6 +67,8 @@ export function OnboardingPage({
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [showErrors, setShowErrors] = useState(false);
   const [done, setDone] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof OnboardingAnswers>(
     key: K,
@@ -85,9 +87,11 @@ export function OnboardingPage({
     STEP_FIELDS[n].filter((f) => answers[f] === null);
 
   const errorFor = (field: OnboardingFieldId, kind: "choice" | "slider") =>
-    showErrors && answers[field] === null ? copy.errors[kind] : undefined;
+    showErrors && answers[field] === null
+      ? `${copy.questions[field]}: ${copy.errors[kind]}`
+      : undefined;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (missingInStep(step).length > 0) {
       setShowErrors(true);
       return;
@@ -99,8 +103,21 @@ export function OnboardingPage({
     if (step < TOTAL_STEPS) {
       setStep(step + 1);
     } else {
-      setDone(true);
-      onComplete?.(answers);
+      setSubmitError(null);
+      setIsSubmitting(true);
+
+      try {
+        await onComplete?.(answers);
+        setDone(true);
+      } catch (error) {
+        setSubmitError(
+          error instanceof Error
+            ? error.message
+            : "Unable to submit your assessment. Please try again."
+        );
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -296,10 +313,20 @@ export function OnboardingPage({
           <Button
             onClick={done ? onSeeScore : handleNext}
             className="flex-1"
+            isLoading={isSubmitting}
           >
             {done || step === TOTAL_STEPS ? copy.finish : copy.continueLabel}
           </Button>
         </div>
+
+        {submitError && (
+          <p
+            role="alert"
+            className="mt-4 rounded-lg bg-rust-light px-4 py-3 text-body-sm text-rust"
+          >
+            {submitError}
+          </p>
+        )}
 
         <div className="mt-6 flex justify-center">
           <HintLine

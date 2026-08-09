@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AuthLayout } from "../components/auth/AuthLayout";
 import { BrandPanel } from "../components/auth/BrandPanel";
 import { FormHeader } from "../components/auth/FormHeader";
@@ -21,7 +20,8 @@ export interface LoginPageProps {
   onNavigateToSignup?: () => void;
   /** Navigate to the forgot-password route */
   onNavigateToForgotPassword?: () => void;
-  initialLocale?: Locale;
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
 }
 
 /**
@@ -32,9 +32,9 @@ export function LoginPage({
   onLoginSuccess,
   onNavigateToSignup,
   onNavigateToForgotPassword,
-  initialLocale = "en",
+  locale,
+  onLocaleChange,
 }: LoginPageProps) {
-  const [locale, setLocale] = useState<Locale>(initialLocale);
   const t = COPY[locale];
 
   return (
@@ -49,7 +49,7 @@ export function LoginPage({
       mobileBrand={
         <Logo name={t.brand.name} variant="light" showWordmark={false} />
       }
-      topRight={<LanguageToggle value={locale} onChange={setLocale} />}
+      topRight={<LanguageToggle value={locale} onChange={onLocaleChange} />}
     >
       <FormHeader title={t.login.title} subtitle={t.login.subtitle} />
 

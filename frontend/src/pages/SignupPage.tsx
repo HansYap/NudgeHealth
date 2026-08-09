@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AuthLayout } from "../components/auth/AuthLayout";
 import { BrandPanel } from "../components/auth/BrandPanel";
 import { FormHeader } from "../components/auth/FormHeader";
@@ -19,7 +18,8 @@ export interface SignupPageProps {
   onSignupSuccess?: (result: SignupSubmitResult) => void;
   /** Navigate back to the login route */
   onNavigateToLogin?: () => void;
-  initialLocale?: Locale;
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
 }
 
 /**
@@ -29,9 +29,9 @@ export interface SignupPageProps {
 export function SignupPage({
   onSignupSuccess,
   onNavigateToLogin,
-  initialLocale = "en",
+  locale,
+  onLocaleChange,
 }: SignupPageProps) {
-  const [locale, setLocale] = useState<Locale>(initialLocale);
   const t = COPY[locale];
 
   return (
@@ -46,7 +46,7 @@ export function SignupPage({
       mobileBrand={
         <Logo name={t.brand.name} variant="light" showWordmark={false} />
       }
-      topRight={<LanguageToggle value={locale} onChange={setLocale} />}
+      topRight={<LanguageToggle value={locale} onChange={onLocaleChange} />}
     >
       <FormHeader title={t.signup.title} subtitle={t.signup.subtitle} />
 
