@@ -20,12 +20,17 @@ import type {
 import { ApiError, logout as logoutFromApi, me } from "./lib/api/auth";
 import {
   type AssessmentResponse,
+  getAssessmentHistory,
   getCurrentAssessment,
   submitBaselineAssessment,
 } from "./lib/api/assessments";
 import { clearAuthTokens, hasAuthTokens } from "./lib/auth/tokens";
 import { getSavedLocale, saveLocale } from "./lib/i18n/locale";
-import { assessmentToRiskSummary } from "./lib/adapters/risk";
+import { actionItemsToFocusTasks, actionItemsToPlanItems } from "./lib/adapters/plan";
+import {
+  assessmentToRiskFactors,
+  assessmentToRiskSummary,
+} from "./lib/adapters/risk";
 import {
   MOCK_RISK,
   MOCK_TASKS,
@@ -55,6 +60,9 @@ export default function App() {
   >(hasAuthTokens() ? null : false);
   const [currentAssessment, setCurrentAssessment] =
     useState<AssessmentResponse | null>(null);
+  const [assessmentHistory, setAssessmentHistory] = useState<
+    AssessmentResponse[]
+  >([]);
   const [baseline, setBaseline] = useState<OnboardingAnswers | null>(null);
   // Set when onboarding was opened from Profile, so we can return there
   // instead of dropping the user on Home.
@@ -108,13 +116,18 @@ export default function App() {
 
   const syncAssessmentState = async () => {
     try {
-      const assessment = await getCurrentAssessment();
+      const [assessment, history] = await Promise.all([
+        getCurrentAssessment(),
+        getAssessmentHistory(),
+      ]);
       setCurrentAssessment(assessment);
+      setAssessmentHistory(history);
       setHasCompletedAssessment(true);
       return true;
     } catch (error) {
       if (error instanceof ApiError && error.status === 404) {
         setCurrentAssessment(null);
+        setAssessmentHistory([]);
         setHasCompletedAssessment(false);
         return false;
       }
@@ -141,6 +154,7 @@ export default function App() {
   const completeBaseline = async (answers: OnboardingAnswers) => {
     const assessment = await submitBaselineAssessment(answers);
     setCurrentAssessment(assessment);
+    setAssessmentHistory((prev) => [assessment, ...prev]);
     setBaseline(answers);
     setHasCompletedAssessment(true);
   };
@@ -154,6 +168,7 @@ export default function App() {
       setIsAuthenticated(false);
       setCurrentUser(null);
       setCurrentAssessment(null);
+      setAssessmentHistory([]);
       setHasCompletedAssessment(false);
       setRetakeOrigin(null);
       setRoute("login");
@@ -234,12 +249,26 @@ export default function App() {
     route === "risk" ? "home" : route === "clinic" ? "plan" : route;
 
   const risk = currentAssessment
-    ? assessmentToRiskSummary(currentAssessment, locale, t.risk.bands)
+    ? assessmentToRiskSummary(
+        currentAssessment,
+        locale,
+        t.risk.bands,
+        assessmentHistory.length > 0 ? assessmentHistory : [currentAssessment]
+      )
     : null;
   const fallbackRisk = {
     ...MOCK_RISK,
     label: t.risk.bands[MOCK_RISK.band],
   };
+  const riskFactors = currentAssessment
+    ? assessmentToRiskFactors(currentAssessment, locale)
+    : MOCK_FACTORS;
+  const focusTasks = currentAssessment
+    ? actionItemsToFocusTasks(currentAssessment.action_items, locale)
+    : MOCK_TASKS;
+  const planItems = currentAssessment
+    ? actionItemsToPlanItems(currentAssessment.action_items, locale)
+    : MOCK_PLAN;
 
   const renderPage = () => {
     switch (route) {
@@ -255,7 +284,7 @@ export default function App() {
               seePlan: t.risk.seePlan,
             }}
             risk={risk ?? fallbackRisk}
-            factors={MOCK_FACTORS}
+            factors={riskFactors}
             onBack={() => setRoute("home")}
             onSeePlan={() => setRoute("plan")}
           />
@@ -264,7 +293,7 @@ export default function App() {
         return (
           <PlanPage
             copy={t.plan}
-            items={MOCK_PLAN}
+            items={planItems}
             onFindClinic={() => setRoute("clinic")}
           />
         );
@@ -298,7 +327,7 @@ export default function App() {
           <HomePage
             copy={t.home}
             risk={risk}
-            tasks={MOCK_TASKS}
+            tasks={focusTasks}
             onViewRiskDetail={() => setRoute("risk")}
             onViewFullPlan={() => setRoute("plan")}
             onRetryScore={syncAssessmentState}

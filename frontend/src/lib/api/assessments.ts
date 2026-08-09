@@ -8,8 +8,27 @@ export interface AssessmentResponse {
   trigger_reason: "onboarding" | "manual_retake" | "diary_flagged";
   modifiable_lifestyle_score: number;
   risk_band: "low" | "moderate" | "high";
-  score_factors: unknown[];
-  action_items: unknown[];
+  score_factors: ScoreFactorResponse[];
+  action_items: ActionItemResponse[];
+}
+
+export interface ScoreFactorResponse {
+  label: string;
+  direction: "increases_risk" | "decreases_risk";
+  category: "smoking" | "bmi_activity";
+}
+
+export interface ActionItemResponse {
+  id: number;
+  rule_code: string;
+  title_en: string;
+  title_ms: string;
+  detail_en: string;
+  detail_ms: string;
+  requires_clinic_visit: boolean;
+  target_facility_type: string;
+  is_priority_ranked: boolean;
+  priority_rank: number | null;
 }
 
 const API_BASE_URL =
@@ -18,6 +37,10 @@ const API_BASE_URL =
 
 export async function getCurrentAssessment() {
   return authenticatedRequest<AssessmentResponse>("/assessments/current/");
+}
+
+export async function getAssessmentHistory() {
+  return authenticatedRequest<AssessmentResponse[]>("/assessments/history/");
 }
 
 export async function submitBaselineAssessment(answers: OnboardingAnswers) {

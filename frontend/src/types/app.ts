@@ -35,7 +35,7 @@ export interface FocusTask {
   meta: string;
 }
 
-export type FactorImpact = "baseline" | "increases" | "lowers";
+export type FactorImpact = "neutral" | "baseline" | "increases" | "lowers";
 
 export interface RiskFactor {
   id: string;

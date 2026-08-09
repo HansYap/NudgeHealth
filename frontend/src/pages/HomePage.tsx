@@ -75,6 +75,7 @@ export function HomePage({
               category={task.category}
               title={task.title}
               meta={task.meta}
+              onClick={onViewFullPlan}
             />
           ))}
         </div>

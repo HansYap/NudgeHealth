@@ -43,9 +43,10 @@ export function StatusPill({
 }
 
 const IMPACT_TOKENS: Record<FactorImpact, { tone: PillTone; symbol?: string }> = {
-  baseline: { tone: "teal" },
-  increases: { tone: "rust", symbol: "\u2212" },
-  lowers: { tone: "sage", symbol: "+" },
+  neutral: { tone: "teal", symbol: "0" },
+  baseline: { tone: "teal", symbol: "0" },
+  increases: { tone: "rust", symbol: "+" },
+  lowers: { tone: "sage", symbol: "\u2212" },
 };
 
 export interface FactorRowProps {
