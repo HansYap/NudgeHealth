@@ -16,7 +16,7 @@ export interface ReassessmentPromptResponse {
 
 const API_BASE_URL =
   (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
-  "http://localhost:8000/api";
+  "https://nudgehealth-3g61.onrender.com/api";
 
 export async function listDiaryEntries() {
   return authenticatedRequest<DiaryEntryResponse[]>("/diary/");
