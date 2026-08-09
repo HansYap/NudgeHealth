@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Stethoscope, Footprints, Salad, Moon } from "lucide-react";
+import { Stethoscope, Footprints, Salad } from "lucide-react";
 import { StatusPill } from "./FactorRow";
 import type { TaskCategory } from "../../types/app";
 
@@ -15,7 +15,6 @@ const CATEGORY_TOKENS: Record<
   check: { icon: Stethoscope, bg: "bg-brand-50", text: "text-brand-700" },
   move: { icon: Footprints, bg: "bg-coral-light", text: "text-coral-dark" },
   eat: { icon: Salad, bg: "bg-sage-light", text: "text-sage" },
-  rest: { icon: Moon, bg: "bg-amber-light", text: "text-amber" },
 };
 
 export interface TaskCardProps {
@@ -27,6 +26,8 @@ export interface TaskCardProps {
   badgeLabel?: string;
   /** Optional italic rationale line, e.g. "Why: low activity level..." */
   why?: string;
+  /** Optional action detail from the backend recommendation rule */
+  detail?: string;
   /** Optional trailing control, e.g. an "Open in Maps" button */
   action?: ReactNode;
   onClick?: () => void;
@@ -43,6 +44,7 @@ export function TaskCard({
   meta,
   badgeLabel,
   why,
+  detail,
   action,
   onClick,
 }: TaskCardProps) {
@@ -69,6 +71,12 @@ export function TaskCard({
         <span className="mt-0.5 block text-caption font-normal normal-case tracking-normal text-slate-500">
           {meta}
         </span>
+
+        {detail && (
+          <span className="mt-1 block text-body-sm font-normal text-slate-600">
+            {detail}
+          </span>
+        )}
 
         {why && (
           <span className="mt-1 block text-caption font-normal normal-case italic tracking-normal text-slate-500">

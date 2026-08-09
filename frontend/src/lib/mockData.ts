@@ -77,6 +77,7 @@ export const MOCK_PLAN: PlanItem[] = [
     title: "Book a mammogram screening",
     meta: "Check \u00b7 once this month",
     priority: true,
+    detail: "Book a screening appointment at a suitable clinic.",
     why: "Why: elevated risk flagged for your age & sex band",
   },
   {
@@ -85,6 +86,7 @@ export const MOCK_PLAN: PlanItem[] = [
     title: "Walk 20 minutes",
     meta: "Move \u00b7 4 times this week",
     priority: true,
+    detail: "Aim for a brisk walk at a comfortable pace.",
     why: "Why: low activity level flagged in your assessment",
   },
   {
@@ -93,15 +95,17 @@ export const MOCK_PLAN: PlanItem[] = [
     title: "Cut down red meat, add more veg",
     meta: "Eat \u00b7 3 times this week",
     priority: true,
+    detail: "Choose more vegetables and fewer high-saturated-fat meals this week.",
     why: "Why: supports cardiovascular risk reduction",
   },
   {
     id: "p4",
-    category: "rest",
-    title: "Sleep 7+ hours nightly",
-    meta: "Rest \u00b7 nightly",
+    category: "check",
+    title: "Medication adherence review",
+    meta: "Check \u00b7 once this month",
     priority: true,
-    why: "Why: low reported sleep quality",
+    detail: "Review your current medicines with a clinician or pharmacist.",
+    why: "Why: supports long-term condition management",
   },
   {
     id: "p5",
@@ -109,6 +113,7 @@ export const MOCK_PLAN: PlanItem[] = [
     title: "Blood pressure check",
     meta: "Check \u00b7 once this month",
     priority: false,
+    detail: "Get a baseline blood pressure reading recorded.",
     why: "Why: preventive \u2014 not urgent given your profile",
   },
   {
@@ -117,6 +122,7 @@ export const MOCK_PLAN: PlanItem[] = [
     title: "10-minute stretch routine",
     meta: "Move \u00b7 3 times this week",
     priority: false,
+    detail: "Keep the routine short and repeatable.",
     why: "Why: complements your walking goal",
   },
 ];

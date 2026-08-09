@@ -107,6 +107,7 @@ export function actionItemsToPlanItems(
     return {
       ...task,
       priority: item.is_priority_ranked,
+      detail: locale === "bm" ? item.detail_ms : item.detail_en,
       why: locale === "bm" ? meta.why_ms : meta.why_en,
     };
   });
@@ -126,7 +127,6 @@ function getCategoryLabel(category: TaskCategory, locale: Locale) {
       check: "Periksa",
       move: "Bergerak",
       eat: "Makan",
-      rest: "Rehat",
     };
     return labels[category];
   }
@@ -135,7 +135,6 @@ function getCategoryLabel(category: TaskCategory, locale: Locale) {
     check: "Check",
     move: "Move",
     eat: "Eat",
-    rest: "Rest",
   };
   return labels[category];
 }

@@ -25,7 +25,7 @@ export interface RiskSummary {
   detailMeta: string;
 }
 
-export type TaskCategory = "check" | "move" | "eat" | "rest";
+export type TaskCategory = "check" | "move" | "eat";
 
 export interface FocusTask {
   id: string;
@@ -49,6 +49,8 @@ export interface RiskFactor {
 export interface PlanItem extends FocusTask {
   /** Shows the PRIORITY pill when true */
   priority: boolean;
+  /** Backend action detail, localized by the adapter */
+  detail: string;
   /** Plain-language rationale, e.g. "Why: low activity level flagged..." */
   why: string;
 }

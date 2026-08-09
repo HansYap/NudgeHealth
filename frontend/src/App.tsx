@@ -10,7 +10,7 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { OnboardingPage } from "./pages/OnboardingPage";
 import type { OnboardingAnswers } from "./lib/onboardingConfig";
 import { AppShell } from "./components/layout/AppShell";
-import type { AppRoute, NavRoute } from "./types/app";
+import type { AppRoute, ClinicOption, NavRoute } from "./types/app";
 import type {
   AuthUser,
   Locale,
@@ -26,17 +26,18 @@ import {
 } from "./lib/api/assessments";
 import { clearAuthTokens, hasAuthTokens } from "./lib/auth/tokens";
 import { getSavedLocale, saveLocale } from "./lib/i18n/locale";
+import { clinicsToOptions } from "./lib/adapters/clinics";
 import { actionItemsToFocusTasks, actionItemsToPlanItems } from "./lib/adapters/plan";
 import {
   assessmentToRiskFactors,
   assessmentToRiskSummary,
 } from "./lib/adapters/risk";
+import { listClinics } from "./lib/api/clinics";
 import {
   MOCK_RISK,
   MOCK_TASKS,
   MOCK_FACTORS,
   MOCK_PLAN,
-  MOCK_CLINICS,
   MOCK_DIARY,
 } from "./lib/mockData";
 
@@ -63,6 +64,7 @@ export default function App() {
   const [assessmentHistory, setAssessmentHistory] = useState<
     AssessmentResponse[]
   >([]);
+  const [clinicOptions, setClinicOptions] = useState<ClinicOption[]>([]);
   const [baseline, setBaseline] = useState<OnboardingAnswers | null>(null);
   // Set when onboarding was opened from Profile, so we can return there
   // instead of dropping the user on Home.
@@ -113,6 +115,24 @@ export default function App() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (route !== "clinic" || !currentAssessment?.state) return;
+
+    let cancelled = false;
+
+    listClinics(currentAssessment.state)
+      .then((clinics) => {
+        if (!cancelled) setClinicOptions(clinicsToOptions(clinics));
+      })
+      .catch(() => {
+        if (!cancelled) setClinicOptions([]);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentAssessment?.state, route]);
 
   const syncAssessmentState = async () => {
     try {
@@ -168,6 +188,7 @@ export default function App() {
       setIsAuthenticated(false);
       setCurrentUser(null);
       setCurrentAssessment(null);
+      setClinicOptions([]);
       setAssessmentHistory([]);
       setHasCompletedAssessment(false);
       setRetakeOrigin(null);
@@ -301,7 +322,7 @@ export default function App() {
         return (
           <ClinicPage
             copy={t.clinic}
-            options={MOCK_CLINICS}
+            options={clinicOptions}
             onBack={() => setRoute("plan")}
           />
         );

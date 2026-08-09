@@ -34,6 +34,7 @@ export function PlanPage({ copy, items, onFindClinic }: PlanPageProps) {
             title={item.title}
             meta={item.meta}
             badgeLabel={item.priority ? copy.priority : undefined}
+            detail={item.detail}
             why={item.why}
           />
         ))}

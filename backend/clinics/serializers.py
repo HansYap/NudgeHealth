@@ -7,5 +7,5 @@ class ClinicSerializer(serializers.ModelSerializer):
         model = Clinic
         fields = [
             "id", "name", "category", "facility_subtype", "address",
-            "town", "postcode", "state", "latitude", "longitude",
+            "district", "postcode", "state",
         ]

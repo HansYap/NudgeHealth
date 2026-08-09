@@ -42,6 +42,6 @@ class RiskAssessmentSerializer(serializers.ModelSerializer):
         # calculation_trace is deliberately NOT listed here — allowlist, not "__all__"
         fields = [
             "id", "created_at", "trigger_reason",
-            "modifiable_lifestyle_score", "risk_band", "score_factors",
+            "state", "modifiable_lifestyle_score", "risk_band", "score_factors",
             "action_items",
         ]

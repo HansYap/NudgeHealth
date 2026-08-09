@@ -6,6 +6,7 @@ export interface AssessmentResponse {
   id: number;
   created_at: string;
   trigger_reason: "onboarding" | "manual_retake" | "diary_flagged";
+  state: string;
   modifiable_lifestyle_score: number;
   risk_band: "low" | "moderate" | "high";
   score_factors: ScoreFactorResponse[];
