@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",       
     "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
     'accounts',
     'scoring',
     'assessments',
     'clinics',
     'diary',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -63,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",   # must sit above CommonMiddleware
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -149,3 +153,8 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  
+    "http://localhost:3000",
+]
