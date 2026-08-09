@@ -42,6 +42,9 @@
     "viewDetails": "Lihat butiran",
     "disclaimerTitle": "Penafian",
     "disclaimerBody": "Skor ini menunjukkan bagaimana tabiat harian anda seperti senaman, berat badan dan merokok mempengaruhi kesihatan jangka panjang anda. Sebarang keadaan kesihatan sedia ada atau pemeriksaan digunakan untuk membina pelan tindakan bulanan anda, bukan untuk menurunkan skor ini.",
+    "reassessmentTitle": "Semak semula",
+    "reassessmentBody": "Catatan diari terkini anda menunjukkan keadaan mungkin telah berubah. Mengambil semula penilaian boleh mengemas kini jalur risiko dan pelan anda apabila anda bersedia.",
+    "reassessmentCta": "Ambil semula penilaian",
     "focusTitle": "Fokus bulan ini",
     "viewFullPlan": "Lihat pelan penuh",
     "errorTitle": "Skor anda tidak dapat dikira",
@@ -78,10 +81,21 @@
     "subtitle": "Hari yang baik dan hari yang sukar kedua-duanya penting di sini.",
     "moodLegend": "Bagaimana perasaan anda hari ini?",
     "moods": {
-      "bad": "Kurang baik",
+      "not_great": "Kurang baik",
       "okay": "Sederhana",
       "good": "Baik"
     },
+    "moodInfoLabel": "Apakah maksud pilihan ini?",
+    "moodInfoTitle": "Cara memilih perasaan",
+    "moodInfoIntro": "Pilih pilihan yang paling menggambarkan hari ini secara keseluruhan. Tiada jawapan yang sempurna.",
+    "moodInfoItems": {
+      "not_great": "Kurang baik: anda rasa tidak sihat, sangat letih, tertekan, sakit, atau gejala terasa lebih teruk daripada biasa.",
+      "okay": "Sederhana: keadaan anda stabil atau bercampur. Hari ini masih boleh diurus walaupun tidak begitu baik.",
+      "good": "Baik: anda rasa sihat, stabil, cukup bertenaga, atau lebih baik daripada kebiasaan anda."
+    },
+    "moodInfoClose": "Tutup",
+    "loadError": "Catatan diari anda tidak dapat dimuatkan. Sila cuba lagi.",
+    "saveError": "Catatan diari anda tidak dapat disimpan. Sila cuba lagi.",
     "noteLabel": "Ada apa-apa untuk dicatat? (pilihan)",
     "notePlaceholder": "cth. tidur lena, terlepas makan tengah hari…",
     "autoLogged": "Direkodkan secara automatik dengan tarikh & masa hari ini",

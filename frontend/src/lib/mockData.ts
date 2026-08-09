@@ -167,7 +167,7 @@ export const MOCK_DIARY: DiaryEntry[] = [
   {
     id: "d3",
     timestamp: "2 days ago, 7:55 AM",
-    mood: "bad",
+    mood: "not_great",
     note: "Headache, skipped breakfast",
   },
 ];

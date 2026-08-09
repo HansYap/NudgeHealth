@@ -42,6 +42,9 @@
     "viewDetails": "View details",
     "disclaimerTitle": "Disclaimer",
     "disclaimerBody": "This score shows how your daily habits like exercise, weight, and smoking affect your long-term health. Any existing health conditions or checkups are used to build your monthly action plan instead of lowering this score.",
+    "reassessmentTitle": "Check in again",
+    "reassessmentBody": "Your recent diary entries suggest things may have changed. Retaking the assessment can refresh your risk band and plan when you are ready.",
+    "reassessmentCta": "Retake assessment",
     "focusTitle": "This month's focus",
     "viewFullPlan": "View full plan",
     "errorTitle": "Couldn't calculate your score",
@@ -78,10 +81,21 @@
     "subtitle": "Good days and hard days both matter here.",
     "moodLegend": "How are you feeling today?",
     "moods": {
-      "bad": "Not great",
+      "not_great": "Not great",
       "okay": "Okay",
       "good": "Good"
     },
+    "moodInfoLabel": "What do these mean?",
+    "moodInfoTitle": "How to choose a feeling",
+    "moodInfoIntro": "Pick the option that best matches today overall. There is no perfect answer.",
+    "moodInfoItems": {
+      "not_great": "Not great: you feel unwell, unusually tired, stressed, in pain, or your symptoms feel worse than usual.",
+      "okay": "Okay: you feel stable or mixed. The day is manageable, even if it is not especially good.",
+      "good": "Good: you feel well, steady, energetic enough, or better than your usual baseline."
+    },
+    "moodInfoClose": "Close",
+    "loadError": "Could not load your diary entries. Please try again.",
+    "saveError": "Could not save your diary entry. Please try again.",
     "noteLabel": "Anything to note? (optional)",
     "notePlaceholder": "e.g. slept well, skipped lunch…",
     "autoLogged": "Logged automatically with today's date & time",

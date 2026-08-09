@@ -14,6 +14,9 @@ export interface HomePageCopy {
   viewDetails: string;
   disclaimerTitle: string;
   disclaimerBody: string;
+  reassessmentTitle: string;
+  reassessmentBody: string;
+  reassessmentCta: string;
   focusTitle: string;
   viewFullPlan: string;
   errorTitle: string;
@@ -29,6 +32,8 @@ export interface HomePageProps {
   onViewRiskDetail?: () => void;
   onViewFullPlan?: () => void;
   onRetryScore?: () => void;
+  shouldPromptReassessment?: boolean;
+  onRetakeAssessment?: () => void;
 }
 
 export function HomePage({
@@ -38,6 +43,8 @@ export function HomePage({
   onViewRiskDetail,
   onViewFullPlan,
   onRetryScore,
+  shouldPromptReassessment = false,
+  onRetakeAssessment,
 }: HomePageProps) {
   return (
     <>
@@ -64,6 +71,16 @@ export function HomePage({
       )}
 
       <InfoCallout title={copy.disclaimerTitle} body={copy.disclaimerBody} />
+
+      {shouldPromptReassessment && (
+        <InfoCallout
+          title={copy.reassessmentTitle}
+          body={copy.reassessmentBody}
+          tone="alert"
+          actionLabel={copy.reassessmentCta}
+          onAction={onRetakeAssessment}
+        />
+      )}
 
       <section className="space-y-4">
         <h2 className="font-sora text-h3 text-brand-800">{copy.focusTitle}</h2>

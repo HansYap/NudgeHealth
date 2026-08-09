@@ -5,7 +5,7 @@ import type { DiaryEntry, Mood } from "../../types/app";
 const MOOD_TONE: Record<Mood, PillTone> = {
   good: "sage",
   okay: "amber",
-  bad: "rust",
+  not_great: "rust",
 };
 
 export interface DiaryEntryCardProps {

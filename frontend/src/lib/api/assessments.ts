@@ -32,6 +32,11 @@ export interface ActionItemResponse {
   priority_rank: number | null;
 }
 
+export type AssessmentTriggerReason =
+  | "onboarding"
+  | "manual_retake"
+  | "diary_flagged";
+
 const API_BASE_URL =
   (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
   "http://localhost:8000/api";
@@ -44,10 +49,13 @@ export async function getAssessmentHistory() {
   return authenticatedRequest<AssessmentResponse[]>("/assessments/history/");
 }
 
-export async function submitBaselineAssessment(answers: OnboardingAnswers) {
+export async function submitBaselineAssessment(
+  answers: OnboardingAnswers,
+  triggerReason: AssessmentTriggerReason = "onboarding"
+) {
   return authenticatedRequest<AssessmentResponse>("/assessments/", {
     method: "POST",
-    body: JSON.stringify(toAssessmentPayload(answers)),
+    body: JSON.stringify(toAssessmentPayload(answers, triggerReason)),
   });
 }
 
@@ -82,9 +90,12 @@ function parseJson(response: Response) {
   return response.text().then((text) => (text ? JSON.parse(text) : null));
 }
 
-function toAssessmentPayload(answers: OnboardingAnswers) {
+function toAssessmentPayload(
+  answers: OnboardingAnswers,
+  triggerReason: AssessmentTriggerReason
+) {
   return {
-    trigger_reason: "onboarding",
+    trigger_reason: triggerReason,
     age: requireAnswer(answers.age),
     sex: mapSex(requireAnswer(answers.sex)),
     state: mapState(requireAnswer(answers.state)),

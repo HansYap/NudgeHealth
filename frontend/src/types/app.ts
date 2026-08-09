@@ -65,7 +65,7 @@ export interface ClinicOption {
   query: string;
 }
 
-export type Mood = "good" | "okay" | "bad";
+export type Mood = "not_great" | "okay" | "good";
 
 export interface DiaryEntry {
   id: string;

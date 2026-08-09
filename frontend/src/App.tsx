@@ -19,6 +19,7 @@ import type {
 } from "./types/auth";
 import { ApiError, logout as logoutFromApi, me } from "./lib/api/auth";
 import {
+  type AssessmentTriggerReason,
   type AssessmentResponse,
   getAssessmentHistory,
   getCurrentAssessment,
@@ -33,12 +34,12 @@ import {
   assessmentToRiskSummary,
 } from "./lib/adapters/risk";
 import { listClinics } from "./lib/api/clinics";
+import { getReassessmentPrompt } from "./lib/api/diary";
 import {
   MOCK_RISK,
   MOCK_TASKS,
   MOCK_FACTORS,
   MOCK_PLAN,
-  MOCK_DIARY,
 } from "./lib/mockData";
 
 import en from "./lib/i18n/en.json";
@@ -69,6 +70,10 @@ export default function App() {
   // Set when onboarding was opened from Profile, so we can return there
   // instead of dropping the user on Home.
   const [retakeOrigin, setRetakeOrigin] = useState<AppRoute | null>(null);
+  const [retakeTriggerReason, setRetakeTriggerReason] =
+    useState<AssessmentTriggerReason>("onboarding");
+  const [shouldPromptReassessment, setShouldPromptReassessment] =
+    useState(false);
   const t = COPY[locale];
 
   const setLocale = (nextLocale: Locale) => {
@@ -134,6 +139,28 @@ export default function App() {
     };
   }, [currentAssessment?.state, route]);
 
+  useEffect(() => {
+    if (route !== "home" || !isAuthenticated || hasCompletedAssessment !== true) {
+      return;
+    }
+
+    let cancelled = false;
+
+    getReassessmentPrompt()
+      .then((prompt) => {
+        if (!cancelled) {
+          setShouldPromptReassessment(prompt.should_prompt_reassessment);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setShouldPromptReassessment(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasCompletedAssessment, isAuthenticated, route]);
+
   const syncAssessmentState = async () => {
     try {
       const [assessment, history] = await Promise.all([
@@ -172,11 +199,21 @@ export default function App() {
   };
 
   const completeBaseline = async (answers: OnboardingAnswers) => {
-    const assessment = await submitBaselineAssessment(answers);
+    const assessment = await submitBaselineAssessment(answers, retakeTriggerReason);
     setCurrentAssessment(assessment);
     setAssessmentHistory((prev) => [assessment, ...prev]);
     setBaseline(answers);
     setHasCompletedAssessment(true);
+    setShouldPromptReassessment(false);
+  };
+
+  const startRetakeAssessment = (
+    origin: AppRoute,
+    triggerReason: AssessmentTriggerReason
+  ) => {
+    setRetakeOrigin(origin);
+    setRetakeTriggerReason(triggerReason);
+    setRoute("onboarding");
   };
 
   const endSession = async () => {
@@ -192,6 +229,8 @@ export default function App() {
       setAssessmentHistory([]);
       setHasCompletedAssessment(false);
       setRetakeOrigin(null);
+      setRetakeTriggerReason("onboarding");
+      setShouldPromptReassessment(false);
       setRoute("login");
     }
   };
@@ -252,6 +291,7 @@ export default function App() {
         onSeeScore={() => {
           setRoute(retakeOrigin ?? "home");
           setRetakeOrigin(null);
+          setRetakeTriggerReason("onboarding");
         }}
       />
     );
@@ -327,7 +367,7 @@ export default function App() {
           />
         );
       case "diary":
-        return <DiaryPage copy={t.diary} initialEntries={MOCK_DIARY} />;
+        return <DiaryPage copy={t.diary} locale={locale} />;
       case "profile":
         return (
           <ProfilePage
@@ -337,8 +377,7 @@ export default function App() {
             locale={locale}
             onLocaleChange={setLocale}
             onRetakeAssessment={() => {
-              setRetakeOrigin("profile");
-              setRoute("onboarding");
+              startRetakeAssessment("profile", "manual_retake");
             }}
             onLogout={endSession}
           />
@@ -352,6 +391,10 @@ export default function App() {
             onViewRiskDetail={() => setRoute("risk")}
             onViewFullPlan={() => setRoute("plan")}
             onRetryScore={syncAssessmentState}
+            shouldPromptReassessment={shouldPromptReassessment}
+            onRetakeAssessment={() => {
+              startRetakeAssessment("home", "diary_flagged");
+            }}
           />
         );
     }
