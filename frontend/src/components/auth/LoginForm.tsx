@@ -2,7 +2,6 @@ import { useState, type FormEvent } from "react";
 import { Input } from "../ui/Input";
 import { PasswordInput } from "../ui/PasswordInput";
 import { Button } from "../ui/Button";
-import { ForgotPasswordLink } from "./ForgotPasswordLink";
 import { loginSchema } from "../../lib/validation/loginSchema";
 import { useAuth } from "../../hooks/useAuth";
 import type {
@@ -14,7 +13,6 @@ import type {
 export interface LoginFormCopy {
   identifierLabel: string;
   passwordLabel: string;
-  forgotPassword: string;
   submit: string;
 }
 
@@ -22,8 +20,6 @@ export interface LoginFormProps {
   copy: LoginFormCopy;
   /** Called after a successful login submit */
   onSuccess?: (result: LoginSubmitResult) => void;
-  /** Called when the "Forgot password?" link is activated */
-  onForgotPassword?: () => void;
 }
 
 const INITIAL_VALUES: LoginFormValues = {
@@ -38,7 +34,6 @@ const INITIAL_VALUES: LoginFormValues = {
 export function LoginForm({
   copy,
   onSuccess,
-  onForgotPassword,
 }: LoginFormProps) {
   const [values, setValues] = useState<LoginFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<LoginFormErrors>({});
@@ -84,23 +79,15 @@ export function LoginForm({
         inputMode="email"
       />
 
-      <div>
-        <PasswordInput
-          id="password"
-          name="password"
-          label={copy.passwordLabel}
-          value={values.password}
-          onChange={handleChange("password")}
-          error={errors.password}
-          autoComplete="current-password"
-        />
-        <div className="mt-2 flex justify-end">
-          <ForgotPasswordLink
-            label={copy.forgotPassword}
-            onClick={onForgotPassword}
-          />
-        </div>
-      </div>
+      <PasswordInput
+        id="password"
+        name="password"
+        label={copy.passwordLabel}
+        value={values.password}
+        onChange={handleChange("password")}
+        error={errors.password}
+        autoComplete="current-password"
+      />
 
       {(errors.form || submitError) && (
         <p

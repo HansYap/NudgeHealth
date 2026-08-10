@@ -240,9 +240,6 @@ export default function App() {
       <LoginPage
         onLoginSuccess={completeLogin}
         onNavigateToSignup={() => setRoute("signup")}
-        onNavigateToForgotPassword={() => {
-          // TODO: wire up routing to /forgot-password
-        }}
         locale={locale}
         onLocaleChange={setLocale}
       />
@@ -273,9 +270,6 @@ export default function App() {
       <LoginPage
         onLoginSuccess={completeLogin}
         onNavigateToSignup={() => setRoute("signup")}
-        onNavigateToForgotPassword={() => {
-          // TODO: wire up routing to /forgot-password
-        }}
         locale={locale}
         onLocaleChange={setLocale}
       />

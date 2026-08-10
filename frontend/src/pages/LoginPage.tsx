@@ -18,8 +18,6 @@ export interface LoginPageProps {
   onLoginSuccess?: (result: LoginSubmitResult) => void;
   /** Navigate to the signup route */
   onNavigateToSignup?: () => void;
-  /** Navigate to the forgot-password route */
-  onNavigateToForgotPassword?: () => void;
   locale: Locale;
   onLocaleChange: (locale: Locale) => void;
 }
@@ -31,7 +29,6 @@ export interface LoginPageProps {
 export function LoginPage({
   onLoginSuccess,
   onNavigateToSignup,
-  onNavigateToForgotPassword,
   locale,
   onLocaleChange,
 }: LoginPageProps) {
@@ -58,11 +55,9 @@ export function LoginPage({
           copy={{
             identifierLabel: t.login.identifierLabel,
             passwordLabel: t.login.passwordLabel,
-            forgotPassword: t.login.forgotPassword,
             submit: t.login.submit,
           }}
           onSuccess={onLoginSuccess}
-          onForgotPassword={onNavigateToForgotPassword}
         />
       </div>
 
