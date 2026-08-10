@@ -2,7 +2,6 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from assessments.models import RiskAssessment
 from .models import DailyLog
 from .serializers import DiaryEntryInputSerializer, DiaryEntrySerializer
 
@@ -30,27 +29,14 @@ class DiaryEntryView(APIView):
 
 
 class ReassessmentCheckView(APIView):
-    """Prompts when the five latest entries since assessment are all "Not great"."""
+    """Prompts when the five latest entries are all "Not great"."""
 
     permission_classes = [permissions.IsAuthenticated]
     THRESHOLD = 5
 
     def get(self, request):
-        current_assessment = RiskAssessment.objects.filter(
-            user=request.user,
-            is_current=True,
-        ).first()
-        if not current_assessment:
-            return Response(
-                {
-                    "should_prompt_reassessment": False,
-                    "not_great_count": 0,
-                }
-            )
-
         recent_feelings = list(
             DailyLog.objects.filter(user=request.user)
-            .filter(logged_at__gt=current_assessment.created_at)
             .order_by("-logged_at")
             .values_list("feeling", flat=True)[: self.THRESHOLD]
         )
