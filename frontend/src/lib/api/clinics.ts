@@ -1,5 +1,6 @@
 import { clearAuthTokens, getAuthTokens } from "../auth/tokens";
 import { ApiError } from "./auth";
+import { API_BASE_URL } from "./config";
 
 export interface ClinicResponse {
   id: number;
@@ -11,10 +12,6 @@ export interface ClinicResponse {
   postcode: string;
   state: string;
 }
-
-const API_BASE_URL =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
-  "https://nudgehealth-3g61.onrender.com/api";
 
 export async function listClinics(state: string) {
   const params = new URLSearchParams({ state });

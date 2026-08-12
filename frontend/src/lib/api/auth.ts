@@ -5,6 +5,7 @@ import {
   saveAuthTokens,
   type AuthTokens,
 } from "../auth/tokens";
+import { API_BASE_URL } from "./config";
 
 type ApiErrorPayload = Record<string, string | string[]> & {
   detail?: string | string[];
@@ -21,10 +22,6 @@ export class ApiError extends Error {
     this.payload = payload;
   }
 }
-
-const API_BASE_URL =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
-  "https://nudgehealth-3g61.onrender.com/api";
 
 async function parseJson(response: Response) {
   const text = await response.text();

@@ -1,6 +1,7 @@
 import type { Mood } from "../../types/app";
 import { clearAuthTokens, getAuthTokens } from "../auth/tokens";
 import { ApiError } from "./auth";
+import { API_BASE_URL } from "./config";
 
 export interface DiaryEntryResponse {
   id: number;
@@ -13,10 +14,6 @@ export interface ReassessmentPromptResponse {
   should_prompt_reassessment: boolean;
   not_great_count: number;
 }
-
-const API_BASE_URL =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
-  "https://nudgehealth-3g61.onrender.com/api";
 
 export async function listDiaryEntries() {
   return authenticatedRequest<DiaryEntryResponse[]>("/diary/");
