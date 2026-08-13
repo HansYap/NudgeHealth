@@ -5,48 +5,10 @@ import {
   saveAuthTokens,
   type AuthTokens,
 } from "../auth/tokens";
-import { API_BASE_URL } from "./config";
-
-type ApiErrorPayload = Record<string, string | string[]> & {
-  detail?: string | string[];
-};
-
-export class ApiError extends Error {
-  status: number;
-  payload: ApiErrorPayload | null;
-
-  constructor(status: number, payload: ApiErrorPayload | null) {
-    super(resolveErrorMessage(payload) ?? "Request failed.");
-    this.name = "ApiError";
-    this.status = status;
-    this.payload = payload;
-  }
-}
-
-async function parseJson(response: Response) {
-  const text = await response.text();
-  return text ? JSON.parse(text) : null;
-}
-
-async function request<T>(path: string, init: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    headers: {
-      "Content-Type": "application/json",
-      ...init.headers,
-    },
-  });
-  const payload = await parseJson(response);
-
-  if (!response.ok) {
-    throw new ApiError(response.status, payload);
-  }
-
-  return payload as T;
-}
+import { ApiError, apiRequest, authenticatedRequest } from "./client";
 
 export function register(values: SignupFormValues) {
-  return request<{ email: string }>("/auth/register/", {
+  return apiRequest<{ email: string }>("/auth/register/", {
     method: "POST",
     body: JSON.stringify({
       email: values.email,
@@ -57,22 +19,19 @@ export function register(values: SignupFormValues) {
 }
 
 export function login(email: string, password: string) {
-  return request<AuthTokens>("/auth/login/", {
+  return apiRequest<AuthTokens>("/auth/login/", {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
 }
 
 export async function me() {
-  const tokens = getAuthTokens();
-  if (!tokens) return null;
+  if (!getAuthTokens()) return null;
 
-  const user = await request<{ id: number | string; email: string }>("/auth/me/", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${tokens.access}`,
-    },
-  });
+  const user = await authenticatedRequest<{
+    id: number | string;
+    email: string;
+  }>("/auth/me/");
 
   return mapUser(user);
 }
@@ -85,17 +44,16 @@ export async function loginWithPassword(values: LoginFormValues) {
 
 export async function logout() {
   const tokens = getAuthTokens();
-  clearAuthTokens();
-
   if (!tokens) return;
 
-  await request<void>("/auth/logout/", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${tokens.access}`,
-    },
-    body: JSON.stringify({ refresh: tokens.refresh }),
-  });
+  try {
+    await authenticatedRequest<void>("/auth/logout/", {
+      method: "POST",
+      body: JSON.stringify({ refresh: tokens.refresh }),
+    });
+  } finally {
+    clearAuthTokens();
+  }
 }
 
 export function getLoginErrorMessage(error: unknown): string {
@@ -134,7 +92,9 @@ export function getSignupErrorMessage(error: unknown): string {
   return resolveErrorMessage(error.payload) ?? "Unable to create your account.";
 }
 
-function resolveErrorMessage(payload: ApiErrorPayload | null): string | null {
+function resolveErrorMessage(
+  payload: Record<string, string | string[]> | null
+): string | null {
   if (!payload) return null;
 
   return (

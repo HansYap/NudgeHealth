@@ -17,7 +17,8 @@ import type {
   LoginSubmitResult,
   SignupSubmitResult,
 } from "./types/auth";
-import { ApiError, logout as logoutFromApi, me } from "./lib/api/auth";
+import { logout as logoutFromApi, me } from "./lib/api/auth";
+import { ApiError } from "./lib/api/client";
 import {
   type AssessmentTriggerReason,
   type AssessmentResponse,
@@ -46,6 +47,7 @@ import en from "./lib/i18n/en.json";
 import bm from "./lib/i18n/bm.json";
 
 const COPY: Record<Locale, typeof en> = { en, bm };
+const SESSION_HEARTBEAT_MS = 4 * 60 * 1000;
 
 type Route = "login" | "signup" | AppRoute;
 
@@ -102,12 +104,14 @@ export default function App() {
             setRoute("login");
           }
         }
-      } catch {
-        clearAuthTokens();
-        if (!cancelled) {
-          setIsAuthenticated(false);
-          setHasCompletedAssessment(false);
-          setRoute("login");
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 401) {
+          clearAuthTokens();
+          if (!cancelled) {
+            setIsAuthenticated(false);
+            setHasCompletedAssessment(false);
+            setRoute("login");
+          }
         }
       } finally {
         if (!cancelled) setIsBootstrapping(false);
@@ -120,6 +124,50 @@ export default function App() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated || isBootstrapping) return;
+
+    let cancelled = false;
+
+    const keepSessionActive = async () => {
+      try {
+        const user = await me();
+        if (!cancelled && user) setCurrentUser(user);
+      } catch (error) {
+        if (!cancelled && error instanceof ApiError && error.status === 401) {
+          clearAuthTokens();
+          setIsAuthenticated(false);
+          setCurrentUser(null);
+          setHasCompletedAssessment(false);
+          setRoute("login");
+        }
+      }
+    };
+
+    const keepSessionActiveWhenVisible = () => {
+      if (document.visibilityState === "visible") void keepSessionActive();
+    };
+
+    const intervalId = window.setInterval(() => {
+      void keepSessionActive();
+    }, SESSION_HEARTBEAT_MS);
+
+    document.addEventListener("visibilitychange", keepSessionActiveWhenVisible);
+    window.addEventListener("focus", keepSessionActiveWhenVisible);
+    window.addEventListener("online", keepSessionActiveWhenVisible);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+      document.removeEventListener(
+        "visibilitychange",
+        keepSessionActiveWhenVisible
+      );
+      window.removeEventListener("focus", keepSessionActiveWhenVisible);
+      window.removeEventListener("online", keepSessionActiveWhenVisible);
+    };
+  }, [isAuthenticated, isBootstrapping]);
 
   useEffect(() => {
     if (route !== "clinic" || !currentAssessment?.state) return;

@@ -1,4 +1,4 @@
-const DEFAULT_API_URL = "https://nudgehealth-3g61.onrender.com/api";
+const DEFAULT_API_URL = "https://nudge-health-v6hv.vercel.app/api";
 
 const configuredApiUrl =
   (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
